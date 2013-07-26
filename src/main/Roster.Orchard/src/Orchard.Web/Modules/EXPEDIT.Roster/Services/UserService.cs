@@ -42,7 +42,10 @@ namespace EXPEDIT.Roster.Services {
 
         public Localizer T { get; set; }
 
-        public void CleanAncientSessions();
+        public void CleanAncientSessions()
+        {
+            throw new NotImplementedException();
+        }
 
         public void EmailUsers(string[] emails, string subject, string body, bool retry = false)
         {

@@ -45,13 +45,20 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=2.6.3.862, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\lib\autofac\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.ComponentModel.DataAnnotations">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -66,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\roster.js" />
+    <Content Include="Styles\roster.css" />
     <Content Include="Web.config" />
     <Content Include="Views\Web.config" />
     <Content Include="Scripts\Web.config" />
@@ -82,17 +90,36 @@
       <Project>{9916839C-39FC-4CEB-A5AF-89CA7E87119F}</Project>
       <Name>Orchard.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Orchard.Email\Orchard.Email.csproj">
+      <Project>{05660f47-d649-48bd-9ded-df4e01e7cff9}</Project>
+      <Name>Orchard.Email</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MainMenu.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Drivers\GlobalSessionPartDriver.cs" />
     <Compile Include="Drivers\RosterPartDriver.cs" />
+    <Compile Include="Handlers\EmailMessageHandler.cs" />
     <Compile Include="Handlers\GlobalSessionPartHandler.cs" />
     <Compile Include="Handlers\RosterPartHandler.cs" />
     <Compile Include="Migrations.cs" />
     <Compile Include="Models\GlobalSessionPart.cs" />
     <Compile Include="Models\RosterPart.cs" />
+    <Compile Include="Services\ConcurrentTaskService.cs" />
+    <Compile Include="Services\GlobalSessionService.cs" />
+    <Compile Include="Services\IConcurrentTaskService.cs" />
+    <Compile Include="Services\IUserService.cs" />
+    <Compile Include="Services\ShellTask.cs" />
+    <Compile Include="Services\UserService.cs" />
+    <Compile Include="Services\CleanSessionsBackgroundTask.cs" />
+    <Compile Include="Services\XmlRpcHandler.cs" />
+    <Compile Include="ViewModels\RosterViewModel.cs" />
+    <Compile Include="Permissions.cs" />
+    <Compile Include="ResourceManifest.cs" />
     <Compile Include="Route.cs" />
+    <Compile Include="Security\RosterAuthorizationEventHandler.cs" />
+    <Compile Include="Services\IGlobalSessionService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Parts\EXPEDIT.Roster.cshtml" />
@@ -108,6 +135,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Parts\EXPEDIT.GlobalSession.cshtml" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
