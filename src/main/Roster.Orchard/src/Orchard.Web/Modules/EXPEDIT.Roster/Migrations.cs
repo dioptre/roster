@@ -19,7 +19,7 @@ namespace EXPEDIT.Roster
             SchemaBuilder.CreateTable("GlobalSessionPartRecord",
                                       table => table
                                                    .ContentPartRecord()
-                                                   .Column<Guid>("GSID")
+                                                   .Column("GSID", System.Data.DbType.Guid)
                 );
 
             return 1;

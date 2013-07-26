@@ -41,7 +41,7 @@ namespace EXPEDIT.Roster.Drivers
         protected override DriverResult Display(GlobalSessionPart part, string displayType, dynamic shapeHelper)
         {
             return ContentShape("Parts_EXPEDIT_GlobalSession",
-                () => shapeHelper.Parts_Jumpstart_Persisted(ContentPart: part));
+                () => shapeHelper.Parts_EXPEDIT_GlobalSession(ContentPart: part));
         }
 
         /// <summary>
