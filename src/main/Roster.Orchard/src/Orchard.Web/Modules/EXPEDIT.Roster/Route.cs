@@ -21,16 +21,16 @@ namespace EXPEDIT.Roster
                     Route = new Route(
                         "Roster/{controller}/{action}",
                         new RouteValueDictionary {
-                            {"area", "Roster"},
+                            {"area", "EXPEDIT.Roster"},
                             {"controller", "User"},
                             {"action", "Index"}
                         },
                         new RouteValueDictionary {
-                            {"area", "Roster"},
+                            {"area", "EXPEDIT.Roster"},
                             {"controller", "User"}
                         },
                         new RouteValueDictionary {
-                            {"area", "Roster"}
+                            {"area", "EXPEDIT.Roster"}
                         },
                         new MvcRouteHandler())
                 },
@@ -39,15 +39,15 @@ namespace EXPEDIT.Roster
                     Route = new Route(
                         "Roster/{controller}/{action}/{id}/{verb}",
                         new RouteValueDictionary {
-                            {"area", "Roster"},
+                            {"area", "EXPEDIT.Roster"},
                             {"controller", "User"}                            
                         },
                         new RouteValueDictionary {
-                            {"area", "Roster"},
+                            {"area", "EXPEDIT.Roster"},
                             {"controller", "User"},                          
                         },
                         new RouteValueDictionary {
-                            {"area", "Roster"}
+                            {"area", "EXPEDIT.Roster"}
                         },
                         new MvcRouteHandler())
                 }

@@ -1,9 +1,11 @@
 using System.Web.Mvc;
 using Orchard.Localization;
 using Orchard;
+using Orchard.Themes;
 
 namespace EXPEDIT.Roster.Controllers
 {
+    [Themed]
     public class UserController : Controller
     {
         public IOrchardServices Services { get; set; }
@@ -15,6 +17,11 @@ namespace EXPEDIT.Roster.Controllers
         }
 
         public Localizer T { get; set; }
+
+        public ActionResult Index()
+        {
+            return View("Index");
+        }
     }
 
 }

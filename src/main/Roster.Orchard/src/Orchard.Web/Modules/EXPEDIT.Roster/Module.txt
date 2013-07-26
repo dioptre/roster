@@ -1,13 +1,13 @@
-﻿Name: EXPEDIT OnlineRoster
+﻿Name: EXPEDIT Roster
 AntiForgery: enabled
-Author: The Orchard Team
-Website: http://orchardproject.net
+Author: The EXPEDIT Team
+Website: http://expedit.com.au
 Version: 1.0
 OrchardVersion: 1.0
-Description: OnlineRoster web module by EXPEDIT.
+Description: Roster web module by EXPEDIT.
 Category: Business
 Features:
     EXPEDIT.Roster: 
-        Description: OnlineRoster web module by EXPEDIT.
+        Description: Roster web module by EXPEDIT.
 		Dependencies: Orchard.Email
 		Category: Business

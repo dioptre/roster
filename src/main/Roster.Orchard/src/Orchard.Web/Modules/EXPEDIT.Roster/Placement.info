@@ -1,0 +1,8 @@
+﻿<!-- This file tells Orchard about location of your parts within content items. -->
+<Placement>
+   <!-- We place PersistedPart at the second position from the beginning of the item's content -->
+   <Place Parts_EXPEDIT_Roster="Content:1"/>
+
+   <!-- We place UnpersistedPart at the beginning of the item's header -->
+   <Place Parts_EXPEDIT_GlobalSession="Header:0"/>
+</Placement>

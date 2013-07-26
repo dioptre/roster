@@ -1,1 +1,9 @@
-﻿<p>hi</p>
+﻿@model EXPEDIT.Roster.ViewModels.RosterViewModel
+@using EXPEDIT.Roster.Models;
+@{
+    Style.Require("Roster");
+    HtmlHelper.ClientValidationEnabled = true;
+    HtmlHelper.UnobtrusiveJavaScriptEnabled = true;
+    Layout.Title = T("Test").ToString();
+}
+<p>hi</p>

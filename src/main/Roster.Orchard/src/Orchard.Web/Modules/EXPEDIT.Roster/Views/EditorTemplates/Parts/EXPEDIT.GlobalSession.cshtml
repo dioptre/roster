@@ -1,0 +1,8 @@
+﻿﻿@model EXPEDIT.Roster.Models.GlobalSessionPart
+<fieldset>
+    <legend>@T("Your persisted part settings")</legend>
+    <div>
+        @Html.LabelFor(m => m.GSID, @T("Your global session id."))
+        @Html.EditorFor(m => m.GSID)
+    </div>
+</fieldset>

@@ -65,6 +65,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Scripts\roster.js" />
     <Content Include="Web.config" />
     <Content Include="Views\Web.config" />
     <Content Include="Scripts\Web.config" />
@@ -84,13 +85,29 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Drivers\GlobalSessionPartDriver.cs" />
+    <Compile Include="Drivers\RosterPartDriver.cs" />
+    <Compile Include="Handlers\GlobalSessionPartHandler.cs" />
+    <Compile Include="Handlers\RosterPartHandler.cs" />
+    <Compile Include="Migrations.cs" />
+    <Compile Include="Models\GlobalSessionPart.cs" />
+    <Compile Include="Models\RosterPart.cs" />
     <Compile Include="Route.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
+    <Content Include="Views\Parts\EXPEDIT.Roster.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\User\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Placement.info" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\EditorTemplates\Parts\EXPEDIT.GlobalSession.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Parts\EXPEDIT.GlobalSession.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
