@@ -135,12 +135,13 @@ function Allocation(name, id, asset, group, ticks, geolocation) {
     this.geolocation = geolocation;
 }
 
-function Solution(name, id, min, max, costs, iterations, confidence, duration, eta, priority, allocations) {
+function Solution(name, id, min, max, costs,solutionType, iterations, confidence, duration, eta, priority, allocations) {
     this.name = name;
     this.id = id || newComb();
     this.min = min;
     this.max = max;
     this.costs = costs;
+    this.solutionType = solutionType;
     this.iterations = iterations;
     this.confidence = confidence;
     this.duration = duration | 0;

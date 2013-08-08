@@ -5,7 +5,7 @@ using Orchard.Themes;
 
 namespace EXPEDIT.Roster.Controllers
 {
-    [Themed]
+    //[Themed]
     public class UserController : Controller
     {
         public IOrchardServices Services { get; set; }
@@ -21,6 +21,11 @@ namespace EXPEDIT.Roster.Controllers
         public ActionResult Index()
         {
             return View("Index");
+        }
+
+        public ActionResult Test()
+        {
+            return View("Test");
         }
     }
 

@@ -1,0 +1,213 @@
+﻿@model EXPEDIT.Roster.ViewModels.RosterViewModel
+@using EXPEDIT.Roster.Models;
+@{
+    Style.Require("Roster");
+    HtmlHelper.ClientValidationEnabled = true;
+    HtmlHelper.UnobtrusiveJavaScriptEnabled = true;
+    Layout.Title = T("Test").ToString();
+}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	
+<script src="@Url.Content("~/Modules/EXPEDIT.Roster/Scripts/vendor/three.js/Three.js")"></script>
+<script src="@Url.Content("~/Modules/EXPEDIT.Roster/Scripts/vendor/three.js/Detector.js")"></script>
+<!-- https://github.com/mrdoob/stats.js -->
+<script src="@Url.Content("~/Modules/EXPEDIT.Roster/Scripts/vendor/three.js/Stats.js")"></script>
+
+<script src="@Url.Content("~/Modules/EXPEDIT.Roster/Scripts/vendor/threex/THREEx.screenshot.js")"></script>
+<script src="@Url.Content("~/Modules/EXPEDIT.Roster/Scripts/vendor/threex/THREEx.FullScreen.js")"></script>
+<script src="@Url.Content("~/Modules/EXPEDIT.Roster/Scripts/vendor/threex/THREEx.WindowResize.js")"></script>
+<script src="@Url.Content("~/Modules/EXPEDIT.Roster/Scripts/vendor/threex/threex.dragpancontrols.js")"></script>
+<script src="@Url.Content("~/Modules/EXPEDIT.Roster/Scripts/vendor/numeric/numeric.js")"></script>
+<script src="@Url.Content("~/Modules/EXPEDIT.Roster/Scripts/expedit/roster.js")"></script>
+
+<!-- three.js container -->
+    	<div id="container"></div>
+	<!-- info on screen display -->
+	<div id="info">
+		<div class="top">
+			<a href="http://learningthreejs.com/blog/2011/12/20/boilerplate-for-three-js/" target="_blank">LearningThree.js</a>
+			boiler plate for
+			<a href="https://github.com/mrdoob/three.js/" target="_blank">three.js</a>
+		</div>
+		<div class="bottom" id="inlineDoc" >
+			- <i>p</i> for screenshot
+		</div> 
+	</div> 
+
+	<script type="text/javascript">
+		var stats, scene, renderer;
+		var camera, cameraControls;
+
+
+		if( !init() )	animate();
+
+		// init the scene
+		function init() {
+
+		    if (Detector.webgl) {
+		        //alert('hi');
+		        renderer = new THREE.WebGLRenderer({
+		            antialias: true,	// to get smoother output
+		            preserveDrawingBuffer: true	// to allow screenshot
+		        });
+		        renderer.setClearColorHex(0xBBBBBB, 1);
+		        // uncomment if webgl is required
+		        //}else{
+		        //	Detector.addGetWebGLMessage();
+		        //	return true;
+		    } else {
+		        renderer = new THREE.CanvasRenderer();
+		    }
+		    renderer.setSize(window.innerWidth, window.innerHeight);
+		    document.getElementById('container').appendChild(renderer.domElement);
+
+		    renderer.shadowMapEnabled = true;
+
+		    // add Stats.js - https://github.com/mrdoob/stats.js
+		    stats = new Stats();
+		    stats.domElement.style.position = 'absolute';
+		    stats.domElement.style.bottom = '0px';
+		    document.body.appendChild(stats.domElement);
+
+		    // create a scene
+		    scene = new THREE.Scene();
+
+		    // put a camera in the scene
+		    camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 1, 10000);
+		    camera.position.set(0, 0, 5);
+		    scene.add(camera);
+
+		    var light = new THREE.SpotLight();
+		    light.position.set(100, 330, 100);
+		    light.castShadow = true;
+		    scene.add(light);
+
+
+		    // create a camera contol
+		    cameraControls = new THREEx.DragPanControls(camera)
+
+		    // transparently support window resize
+		    THREEx.WindowResize.bind(renderer, camera);
+		    // allow 'p' to make screenshot
+		    THREEx.Screenshot.bindKey(renderer);
+		    // allow 'f' to go fullscreen where this feature is supported
+		    if (THREEx.FullScreen.available()) {
+		        THREEx.FullScreen.bindKey();
+		        document.getElementById('inlineDoc').innerHTML += "- <i>f</i> for fullscreen";
+		    }
+
+		    var planeGeo = new THREE.PlaneGeometry(4, 2, 10, 10);
+		    planeGeo.castShadow = true;
+		    planeGeo.receiveShadow = true;
+		    var planeMat = new THREE.MeshPhongMaterial({ color: 0xFFFAAF });
+		    var plane = new THREE.Mesh(planeGeo, planeMat);
+		    plane.rotation.x = -Math.PI / 2;
+		    plane.position.y = -2;
+		    plane.receiveShadow = true;
+		    scene.add(plane);
+		    // here you add your objects
+		    // - you will most likely replace this part by your own
+		    //var geometry	= new THREE.TorusGeometry( 1, 0.42 );
+		    //var material	= new THREE.MeshNormalMaterial();
+		    var material = new THREE.MeshPhongMaterial({ color: 0xFF0AB0, opacity: 0.8 });
+		    //var mesh	= new THREE.Mesh( geometry, material );
+		    //scene.add( mesh );
+		    var b = true;
+		    var m = 52.0;
+		    for (var i = -1000; true && i < 1001; i++) {
+		        //var mesh2 = new THREE.Mesh(new THREE.CubeGeometry(0.05,0.05,0.05),material);
+		        var test1 = new THREE.PlaneGeometry(1, 1, 10, 10);
+		        test1.castShadow = true;
+		        test1.receiveShadow = true;
+		        var mesh2 = new THREE.Mesh(test1, material);
+		        mesh2.position.y = m * i / 1000;
+		        mesh2.position.x = m * i / 1000;
+		        mesh2.position.z = m * Math.random();
+		        scene.add(mesh2);
+		        //scene.remove(mesh2);
+
+		    }
+		    //alert((((new Date()).getTime() * 10000) + 621355968000000000));
+		    //var bs;
+		    //bs.max = ticks1;
+		    //bs.min = ticks2;
+		    //bs.unitResolution = 1000000;
+		    //bs.problem.id = guid;
+		    //bs.me.id = guid2;
+		    //bs.resources = objresources; 
+		    //bs.resources.classes = objclasses; //root classes must be fixed, work, material, cost [[review!!!!]]
+		    //bs.resources.classes[0].class = 'registered nurse'; //context specific
+		    //bs.resources.classes[0].defaultAvailability = numeric.rep(0);
+		    //bs.resources.classes[0].defaultConstraint = regexp;
+		    //bs.resources[0].rootclass = fixed; 
+		    //bs.resources[0].capacities[0].capacity = 100;
+		    //bs.resources[0].capacities[0].class = students;
+		    //bs.resources[0].parents = bs.resources[1]; //include in solution if not a parent
+		    //bs.resources[0].classes = bs.resources.classes[0];
+		    //bs.resources[0].availability = numeric.rep(0);
+		    //bs.resources[0].unitCost = $5000;
+		    //bs.resources[0].location = [320,160.55, elevation];
+		    //bs.constraints[0].type = soft; //soft, hard
+		    //bs.constraints[0].fixed = false; //generated pseudo-random matrix or xor matrix?
+		    //bs.constraints[0].weight = 0;
+		    //bs.constraints[0].resource = bs.resources[0];
+		    //bs.constraints[0].blocks = ccsGetBlock(4,5); //look to fixed for explanation
+		    //bs.constraints[0].regexp = regexp;
+		    //bs.solution.resources[0].allocation = numeric.rep(0); //with location
+		    //bs.solution.cost = $1555;
+		    //bs.solution.costType = money;
+		    //bs.solution.solutionType = minimiseMoney;
+		    //bs.solution.iterations = 155555;
+
+
+
+
+
+
+
+
+		    var projector = new THREE.Projector();
+		    window.addEventListener('mousedown', function (ev) {
+		        if (ev.target == renderer.domElement) {
+		            var x = ev.clientX;
+		            var y = ev.clientY;
+		            var v = new THREE.Vector3((x / window.innerWidth) * 2 - 1, -(y / window.innerHeight) * 2 + 1, 0.5);
+		            projector.unprojectVector(v, camera);
+		            var ray = new THREE.Ray(camera.position,
+                                                    v.subSelf(camera.position).normalize());
+		            var intersects = ray.intersectObjects(controller.objects);
+		            if (intersects.length > 0) {
+		                //controller.setCurrent(intersects[0].object);
+		                alert(intersects[0]);
+		            }
+		        }
+		    }, false);
+
+		}
+
+		// animation loop
+		function animate() {
+
+			// loop on request animation loop
+			// - it has to be at the begining of the function
+			// - see details at http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating
+			requestAnimationFrame( animate );
+
+			// do the render
+			render();
+
+			// update stats
+			stats.update();
+		}
+
+		// render the scene
+		function render() {
+
+			// update camera controls
+			cameraControls.update();
+
+			// actually render the scene
+			renderer.render( scene, camera );
+		}
+	</script>
