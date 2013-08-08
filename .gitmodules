@@ -1,3 +1,6 @@
 [submodule "src/main/Roster.Orchard/src/Orchard.Web/Modules/EXPEDIT.Roster/Scripts/vendor/JSON-js"]
 	path = src/main/Roster.Orchard/src/Orchard.Web/Modules/EXPEDIT.Roster/Scripts/vendor/JSON-js
 	url = https://github.com/douglascrockford/JSON-js.git
+[submodule "src/main/Roster.Orchard/src/Orchard.Web/Modules/EXPEDIT.Roster/Scripts/vendor/backbone"]
+	path = src/main/Roster.Orchard/src/Orchard.Web/Modules/EXPEDIT.Roster/Scripts/vendor/backbone
+	url = https://github.com/jashkenas/backbone.git
