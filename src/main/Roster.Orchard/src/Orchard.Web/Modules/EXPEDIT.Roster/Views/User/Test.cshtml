@@ -1,7 +1,7 @@
 ﻿@model EXPEDIT.Roster.ViewModels.RosterViewModel
 @using EXPEDIT.Roster.Models;
+@if (!AuthorizedFor(EXPEDIT.Roster.Permissions.Developer)) { throw new Orchard.Security.OrchardSecurityException(T("Unauthorized")); }
 @{
-    if (!AuthorizedFor(EXPEDIT.Roster.Permissions.Developer)) { throw new Orchard.Security.OrchardSecurityException(T("Unauthorized")); }
     Style.Require("Roster");
     HtmlHelper.ClientValidationEnabled = true;
     HtmlHelper.UnobtrusiveJavaScriptEnabled = true;
