@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!-- saved from url=(0049)http://layout.jquery-dev.net/demos/printable.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" style="height: 100%; overflow: hidden;"><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+	<title>Simple Layout Demo</title>
+
+	<style type="text/css">
+
+	/**
+	 *	Basic CSS - not related to the layout
+	 */
+	body {
+		font-family: Arial, sans-serif;
+		font-size: 0.85em;
+	}
+	p {
+		margin: 1em 0;
+	}
+
+
+	/**
+	 *	Cosmetic Styling for Layout Elements
+	 */
+	.ui-layout-pane { 
+		background:	#FFF; 
+		border:		1px solid #F00; 
+		padding:	10px; 
+		overflow:	auto;
+	} 
+	.ui-layout-resizer {
+		background:	#DDD; 
+	} 
+	.ui-layout-toggler {
+		background:	#AAA; 
+	}
+
+	</style>
+
+	<style type="text/css" media="print">
+	/**
+	 *	PRINT Stylesheet
+	 * 
+	 *	First 'neutralize' all the positioning/overflow CSS added by Layout
+	 *	Then change or add cosmetic styles (borders, padding) for printing
+	 *
+	 *	MUST use "!important" for all size, position, margin & overflow rules,
+	 *	so these will 'override' styles applied to the elements by Layout
+	 */
+
+	html, body {
+		/* NEUTRALIZE 'layout container' styles */
+		overflow:	visible 	!important;
+		width:		auto		!important;
+		height:		auto		!important;
+		position:	static		!important;
+	}
+	.ui-layout-pane ,
+	.ui-layout-resizer ,
+	.ui-layout-toggler {
+		/* NEUTRALIZE 'layout element' styles */
+		display:	none		!important; /* hide ALL by default */
+		position:	relative	!important;
+		top:		auto		!important;
+		bottom:		auto		!important;
+		left:		auto		!important;
+		right:		auto		!important;
+		width:		auto		!important;
+		height:		auto		!important;
+		overflow:	visible		!important;
+	}
+	/* SHOW ONLY the panes you want */
+	.ui-layout-pane-north ,
+	.ui-layout-pane-south ,
+	.ui-layout-pane-east ,
+	.ui-layout-pane-center {
+		display:	block		!important;
+		/* OPTIONAL: change cosmetic styles as desired
+		border:		0			!important;
+		padding:	0			!important;
+		background:	transparent	!important;
+		*/
+	}
+	/* float the east pane to create a sidebar */
+	.ui-layout-pane-east {
+		float:			right;
+		width:			25%			!important;
+		margin-left:	1em			!important;
+		margin-bottom:	1ex			!important;
+	}
+
+	</style>
+
+
+	<script type="text/javascript" src="./Simple Layout Demo_files/jquery.js"></script>
+	<script type="text/javascript" src="./Simple Layout Demo_files/jquery.ui.all.js"></script>
+	<script type="text/javascript" src="./Simple Layout Demo_files/jquery.layout.js"></script>
+
+	<script type="text/javascript">
+
+		$(document).ready(function () {
+			$('body').layout();
+		});
+
+	</script>
+
+<script type="text/javascript" src="chrome-extension://pmoflmbbcfgacopiikdcpmbiellfihdg/webkitnotif-wrapper-builder.js"></script><script type="text/javascript" src="chrome-extension://pmoflmbbcfgacopiikdcpmbiellfihdg/unity-api-page-proxy-builder-gen.js"></script><script type="text/javascript" src="chrome-extension://pmoflmbbcfgacopiikdcpmbiellfihdg/unity-api-page-proxy.js"></script></head>
+<body style="overflow: hidden; position: relative; height: 100%; margin: 0px; padding: 0px; border: none;">
+
+<div class="ui-layout-north ui-layout-pane ui-layout-pane-north open" pane="north" style="visibility: visible; display: block; position: absolute; margin: 0px; z-index: 2; top: 0px; bottom: auto; left: 0px; right: 0px; width: auto; height: 16px;">
+	This is the north pane
+</div>
+
+<div class="ui-layout-west ui-layout-pane ui-layout-pane-west open" pane="west" style="visibility: visible; display: block; position: absolute; margin: 0px; z-index: 2; left: 0px; right: auto; top: 44px; bottom: 44px; height: 657px; width: 178px;">
+	This is the west pane
+</div>
+
+<div class="ui-layout-east ui-layout-pane ui-layout-pane-east open" pane="east" style="visibility: visible; display: block; position: absolute; margin: 0px; z-index: 2; left: auto; right: 0px; top: 44px; bottom: 44px; height: 657px; width: 178px;">
+	This is the east pane
+	<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+	<p>BOTTOM OF EAST PANE</p>
+</div>
+
+<div class="ui-layout-center ui-layout-pane ui-layout-pane-center open" pane="center" style="visibility: visible; display: block; position: absolute; margin: 0px; z-index: 2; left: 206px; right: 206px; top: 44px; bottom: 44px; height: 657px; width: 1101px;">
+	If you Print Preview this page, it will print like this...
+	<ul>
+		<li>North-pane as a header</li>
+		<li>Center-pane under the header, spanning multiple pages</li>
+		<li>South-pane immediately after the center-pane</li>
+		<li>East-pane 'floating' in upper-right of center-pane</li>
+		<li>West-pane hidden</li>
+	</ul>
+	<p>
+		Everything should print exactly as if there were no 'layout' used.
+		There should be no gaps or overlap between the sections.
+		The red borders are visible for printing so the alignment can be seen easily.
+	</p>
+	
+	<p>&nbsp;</p>
+	<p><a href="http://layout.jquery-dev.net/demos.html">Go to the Demos page</a></p>
+	<p>&nbsp;</p>
+	
+	<p>
+		Now is the time for all good men to come to the aid of their country.
+		Now is the time for all good men to come to the aid of their country.
+		Now is the time for all good men to come to the aid of their country.
+		Now is the time for all good men to come to the aid of their country.
+		Now is the time for all good men to come to the aid of their country.
+		Now is the time for all good men to come to the aid of their country.
+		Now is the time for all good men to come to the aid of their country.
+		Now is the time for all good men to come to the aid of their country.
+	</p>
+	<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+	<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+	<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+	<p>
+		Now is the time for all good men to come to the aid of their country.
+		Now is the time for all good men to come to the aid of their country.
+		Now is the time for all good men to come to the aid of their country.
+		Now is the time for all good men to come to the aid of their country.
+	</p>
+	<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+	<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+	<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+	<p>
+		Now is the time for all good men to come to the aid of their country.
+		Now is the time for all good men to come to the aid of their country.
+		Now is the time for all good men to come to the aid of their country.
+		Now is the time for all good men to come to the aid of their country.
+	</p>
+	<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+	<p>END OF CENTER PANE</p>
+</div>
+
+<div class="ui-layout-south ui-layout-pane ui-layout-pane-south open" pane="south" style="visibility: visible; display: block; position: absolute; margin: 0px; z-index: 2; top: auto; bottom: 0px; left: 0px; right: 0px; width: auto; height: 16px;">
+	This is the south pane
+</div>
+
+
+<div id="ui-datepicker-div" style="display: none;"></div><span id="" resizer="north" style="position: absolute; padding: 0px; margin: 0px; font-size: 1px; text-align: left; overflow: hidden; z-index: 1; top: 38px; width: 1535px; height: 6px; left: 0px; cursor: n-resize;" class="ui-layout-resizer ui-layout-resizer-north ui-layout-resizer-open ui-layout-resizer-north-open ui-draggable" title="Resize"><div id="" style="position: absolute; display: block; padding: 0px; margin: 0px; overflow: hidden; text-align: center; font-size: 1px; cursor: pointer; z-index: 1; width: 50px; height: 6px; left: 742px;" title="Close" class="ui-layout-toggler ui-layout-toggler-north ui-layout-toggler-open ui-layout-toggler-north-open"></div></span><span id="" resizer="south" style="position: absolute; padding: 0px; margin: 0px; font-size: 1px; text-align: left; overflow: hidden; z-index: 1; bottom: 38px; width: 1535px; height: 6px; left: 0px; cursor: s-resize;" class="ui-layout-resizer ui-layout-resizer-south ui-layout-resizer-open ui-layout-resizer-south-open ui-draggable" title="Resize"><div id="" style="position: absolute; display: block; padding: 0px; margin: 0px; overflow: hidden; text-align: center; font-size: 1px; cursor: pointer; z-index: 1; width: 50px; height: 6px; left: 742px;" title="Close" class="ui-layout-toggler ui-layout-toggler-south ui-layout-toggler-open ui-layout-toggler-south-open"></div></span><span id="" resizer="east" style="position: absolute; padding: 0px; margin: 0px; font-size: 1px; text-align: left; overflow: hidden; z-index: 1; right: 200px; height: 679px; width: 6px; top: 44px; cursor: e-resize;" class="ui-layout-resizer ui-layout-resizer-east ui-layout-resizer-open ui-layout-resizer-east-open ui-draggable" title="Resize"><div id="" style="position: absolute; display: block; padding: 0px; margin: 0px; overflow: hidden; text-align: center; font-size: 1px; cursor: pointer; z-index: 1; height: 50px; width: 6px; top: 314px;" title="Close" class="ui-layout-toggler ui-layout-toggler-east ui-layout-toggler-open ui-layout-toggler-east-open"></div></span><span id="" resizer="west" style="position: absolute; padding: 0px; margin: 0px; font-size: 1px; text-align: left; overflow: hidden; z-index: 1; left: 200px; height: 679px; width: 6px; top: 44px; cursor: w-resize;" class="ui-layout-resizer ui-layout-resizer-west ui-layout-resizer-open ui-layout-resizer-west-open ui-draggable" title="Resize"><div id="" style="position: absolute; display: block; padding: 0px; margin: 0px; overflow: hidden; text-align: center; font-size: 1px; cursor: pointer; z-index: 1; height: 50px; width: 6px; top: 314px;" title="Close" class="ui-layout-toggler ui-layout-toggler-west ui-layout-toggler-open ui-layout-toggler-west-open"></div></span><embed type="application/x-unity-webapps-npapi" id="unityChromiumExtensionId" height="0" width="0" style="display: block !important;"></body></html>

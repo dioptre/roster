@@ -1,0 +1,159 @@
+
+<!-- saved from url=(0048)http://layout.jquery-dev.net/demos/destroy2.html -->
+<html style="overflow: hidden; height: 100%; border: none; padding: 0px; margin: 0px;"><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>Layout Destroy Demo #2</title>
+
+	<link type="text/css" rel="stylesheet" href="./Layout Destroy Demo #2_files/layout-default-latest.css">
+	<style type="text/css">
+	.container	{ padding: 0; overflow: hidden; }
+	.blue		{ background: #EEF; }
+	.green		{ background: #EFE; }
+	button		{ padding: 5px 7px; }
+	</style>
+
+	<script type="text/javascript" src="./Layout Destroy Demo #2_files/jquery-latest.js"></script>
+	<script type="text/javascript" src="./Layout Destroy Demo #2_files/jquery-ui-latest.js"></script>
+	<script type="text/javascript" src="./Layout Destroy Demo #2_files/jquery.layout-latest.js"></script>
+	<script type="text/javascript" src="./Layout Destroy Demo #2_files/debug.js"></script>
+	<script type="text/javascript">
+
+	function outputHashStructure ( hash, title ) {
+		if ($.type(hash) === 'string') {
+			hash = eval(hash);
+		}
+		var data = getKeys( hash );
+		console.data( data, title || 'data' );
+		return data;
+
+		function getKeys ( branch ) {
+			var keys = {};
+			$.each( branch, function (k,v) {
+				if ($.isPlainObject( v )) {
+					// we can skip sub-keys in options, state, etc.
+					if ( k.match(/(options|state)/) ) // 
+						keys[ k ] = {};
+					else
+						keys[ k ] = getKeys( v );
+				}
+			});
+			return keys;
+		};
+	};
+
+	$(document).ready(function () {
+		pageLayout = $('body').layout({
+			name:		'outerLayout'
+		,	west: {
+				size:		.50
+			,	children: {
+					name:		'middleLayout'
+				,	center__children: {
+						name:		'innerLayout'
+					,	east__size:	.33
+					,	west__size:	.33
+					,	autoResize:	true // try to maintain percentage sizes
+					,	stateManagement__autoLoad: false // disable cascaded state-loading
+					}
+				}
+			}
+		,	east: {
+				initClosed:	true
+			}
+		,	stateManagement: {
+				enabled:	true	// NOTE: includeChildren = true  by default
+			}
+		});
+
+		// manually add a layout inside the center content-div
+		// the page-layout will be automatically detected and updated
+		pageLayout.center.content.layout();
+
+		// sync checkbox with layout state options
+		var state = pageLayout.options.stateManagement;
+		$('#autoSaveState').attr("checked", (state.enabled && !!state.autoSave) );
+		$('#autoLoadState').attr("checked", (state.enabled && !!state.autoLoad) );
+
+	});
+
+	</script>
+
+<script type="text/javascript" src="chrome-extension://pmoflmbbcfgacopiikdcpmbiellfihdg/webkitnotif-wrapper-builder.js"></script><script type="text/javascript" src="chrome-extension://pmoflmbbcfgacopiikdcpmbiellfihdg/unity-api-page-proxy-builder-gen.js"></script><script type="text/javascript" src="chrome-extension://pmoflmbbcfgacopiikdcpmbiellfihdg/unity-api-page-proxy.js"></script></head>
+<body style="zoom: 1; overflow: hidden; width: auto; height: auto; margin: 0px; position: absolute; top: 0px; bottom: 0px; left: 0px; right: 0px;" class="ui-layout-container">
+
+<div class="ui-layout-north ui-layout-pane ui-layout-pane-north" style="position: absolute; margin: 0px; top: 0px; bottom: auto; left: 0px; right: 0px; width: auto; z-index: 0; height: 33px; display: block; visibility: visible;">Outer North &nbsp; &nbsp;
+
+	<button onclick="pageLayout.destroy()">Destroy Outer</button>
+	
+	<button onclick="pageLayout = pageLayout.container.layout( pageLayout.options )">Create Outer</button> &nbsp; &nbsp;
+
+
+	<button onclick="pageLayout.west.children.middleLayout.destroy()">Destroy Middle</button>
+	
+	<button onclick="pageLayout.createChildren(&#39;west&#39;)">Create Middle</button> &nbsp; &nbsp;
+
+
+	<button onclick="pageLayout.west.children.middleLayout.center.children.innerLayout.destroy()">Destroy Inner</button>
+
+	<button onclick="pageLayout.west.children.middleLayout.createChildren(&#39;center&#39;)">Create Inner</button> &nbsp; &nbsp;
+
+
+	<button onclick="pageLayout.removePane(&#39;west&#39;)">Remove Outer-West Pane</button>
+	
+	<button onclick="pageLayout.addPane(&#39;west&#39;)">Re-Add Outer-West Pane</button> &nbsp; &nbsp;
+
+</div>
+
+<div class="ui-layout-center container blue ui-layout-pane ui-layout-pane-center" style="position: absolute; margin: 0px; left: 767px; right: 6px; top: 61px; bottom: 47px; height: 657px; width: 760px; z-index: 0; display: block; visibility: visible;">
+	<div style="padding: 10px 10px 0;">
+		Outer Center &nbsp; &nbsp;
+
+		<button onclick="pageLayout.center.children.layout1.destroy()">
+		Destroy Center</button>
+
+		<button onclick="pageLayout.center.content.layout()">Create Center</button>
+
+		<p><a href="http://layout.jquery-dev.net/demos.html">Go to the Demos page</a></p>
+	</div>
+	<div class="ui-layout-content green" style="border-top-width: 1px; border-top-style: solid; border-top-color: rgb(187, 187, 187); position: relative; height: 542px; visibility: visible; overflow: hidden;">
+		<div class="ui-layout-north" style="visibility: visible;">Center North</div>
+		<div class="ui-layout-center" style="visibility: visible;">
+			Center Center
+			<p>
+				<input value="pageLayout.west.children.layout1" type="text" style="width: 100%; font-size: 1.1em; padding: 5px; border-radius: 5px;">
+				<button onclick="var v = $(this).prev().val(); outputHashStructure( v, v )">Log This Branch</button>&nbsp;&nbsp;&nbsp;
+				<button onclick="outputHashStructure( pageLayout, &#39;pageLayout&#39; )">Log All Branches</button>
+				<button onclick="console.data( pageLayout, &#39;pageLayout&#39; )">Log All Data</button>
+			</p>
+
+			<p></p><hr>
+				<input id="autoLoadState" type="checkbox" value="1" checked="checked" disabled="disabled" onchange="var o = pageLayout.options.stateManagement; o.autoSave=this.checked; if (this.checked) o.enabled=true;" onclick="this.blur(); this.focus();">
+				<label for="autoLoadState" style="color: #888;"><b>options.stateManagement.autoLoad</b></label>
+				<br> &nbsp; &nbsp; &nbsp; load-state when layout created - see options
+				<br><br>
+				<input id="autoSaveState" type="checkbox" value="1" checked="checked" onchange="var o = pageLayout.options.stateManagement; o.autoSave=this.checked; if (this.checked) o.enabled=true;" onclick="this.blur(); this.focus();">
+				<label for="autoSaveState"><b>options.stateManagement.autoSave</b></label>
+				<br> &nbsp; &nbsp; &nbsp; save-state on window.unload &amp; layout.destroy()
+				<br><br>
+				<button onclick="pageLayout.deleteCookie()">pageLayout.deleteCookie()</button>
+			<p></p>
+		</div>
+		<div class="ui-layout-south" style="visibility: visible;">Center South</div>
+	</div>
+</div>
+
+<div class="ui-layout-west blue ui-layout-pane ui-layout-pane-west ui-layout-container ui-layout-pane-hover ui-layout-pane-west-hover ui-layout-pane-open-hover ui-layout-pane-west-open-hover" style="visibility: visible; position: absolute; margin: 0px; left: 0px; right: auto; top: 61px; bottom: 47px; height: 637px; z-index: 0; width: 739px; display: block; overflow: hidden;"><b><u>Outer West</u></b>
+	<div class="ui-layout-north ui-layout-pane ui-layout-pane-north" style="visibility: visible; position: absolute; margin: 0px; top: 10px; bottom: auto; left: 10px; right: 10px; width: auto; z-index: 0; height: 19px; display: block;">Middle North</div>
+	<div class="ui-layout-south ui-layout-pane ui-layout-pane-south" style="visibility: visible; position: absolute; margin: 0px; top: auto; bottom: 10px; left: 10px; right: 10px; width: auto; z-index: 0; height: 19px; display: block;">Middle South</div>
+	<div class="ui-layout-center green ui-layout-pane ui-layout-pane-center ui-layout-container ui-layout-pane-hover ui-layout-pane-center-hover ui-layout-pane-open-hover ui-layout-pane-center-open-hover" style="visibility: visible; position: absolute; margin: 0px; left: 10px; right: 10px; top: 57px; bottom: 57px; height: 521px; width: 717px; z-index: 0; display: block; overflow: hidden;"><b><u>Middle Center</u></b>
+		<div class="ui-layout-west ui-layout-pane ui-layout-pane-west" style="visibility: visible; position: absolute; margin: 0px; left: 10px; right: auto; top: 10px; bottom: 10px; height: 499px; z-index: 0; width: 212px; display: block;">Inner West</div>
+		<div class="ui-layout-east ui-layout-pane ui-layout-pane-east ui-layout-pane-hover ui-layout-pane-east-hover ui-layout-pane-open-hover ui-layout-pane-east-open-hover" style="visibility: visible; position: absolute; margin: 0px; left: auto; right: 10px; top: 10px; bottom: 10px; height: 499px; z-index: 0; width: 210px; display: block;">Inner East</div>
+		<div class="ui-layout-center ui-layout-pane ui-layout-pane-center" style="visibility: visible; position: absolute; margin: 0px; left: 250px; right: 248px; top: 10px; bottom: 10px; height: 499px; width: 217px; z-index: 0; display: block;">Inner Center</div>
+	<div id="" style="position: absolute; padding: 0px; margin: 0px; font-size: 1px; text-align: left; overflow: hidden; z-index: 2; cursor: w-resize; left: 244px; height: 521px; width: 6px; top: 10px;" class="ui-layout-resizer ui-layout-resizer-west ui-layout-resizer-open ui-layout-resizer-west-open" title="Resize" aria-disabled="false"><div id="" style="position: absolute; display: block; padding: 0px; margin: 0px; overflow: hidden; text-align: center; font-size: 1px; cursor: pointer; z-index: 1; visibility: visible; height: 48px; width: 6px; top: 235px; left: 0px;" class="ui-layout-toggler ui-layout-toggler-west ui-layout-toggler-open ui-layout-toggler-west-open" title="Close"></div></div><div id="" style="position: absolute; padding: 0px; margin: 0px; font-size: 1px; text-align: left; overflow: hidden; z-index: 2; cursor: e-resize; right: 242px; height: 521px; width: 6px; top: 10px;" class="ui-layout-resizer ui-layout-resizer-east ui-layout-resizer-open ui-layout-resizer-east-open" title="Resize" aria-disabled="false"><div id="" style="position: absolute; display: block; padding: 0px; margin: 0px; overflow: hidden; text-align: center; font-size: 1px; cursor: pointer; z-index: 1; visibility: visible; height: 48px; width: 6px; top: 235px; left: 0px;" class="ui-layout-toggler ui-layout-toggler-east ui-layout-toggler-open ui-layout-toggler-east-open" title="Close"></div></div></div>
+<div id="" style="position: absolute; padding: 0px; margin: 0px; font-size: 1px; text-align: left; overflow: hidden; z-index: 2; cursor: n-resize; top: 51px; width: 739px; height: 6px; left: 10px;" class="ui-layout-resizer ui-layout-resizer-north ui-layout-resizer-open ui-layout-resizer-north-open" title="Resize" aria-disabled="false"><div id="" style="position: absolute; display: block; padding: 0px; margin: 0px; overflow: hidden; text-align: center; font-size: 1px; cursor: pointer; z-index: 1; visibility: visible; width: 48px; height: 6px; left: 344px; top: 0px;" class="ui-layout-toggler ui-layout-toggler-north ui-layout-toggler-open ui-layout-toggler-north-open" title="Close"></div></div><div id="" style="position: absolute; padding: 0px; margin: 0px; font-size: 1px; text-align: left; overflow: hidden; z-index: 2; cursor: s-resize; bottom: 51px; width: 739px; height: 6px; left: 10px;" class="ui-layout-resizer ui-layout-resizer-south ui-layout-resizer-open ui-layout-resizer-south-open" title="Resize" aria-disabled="false"><div id="" style="position: absolute; display: block; padding: 0px; margin: 0px; overflow: hidden; text-align: center; font-size: 1px; cursor: pointer; z-index: 1; visibility: visible; width: 48px; height: 6px; left: 344px; top: 0px;" class="ui-layout-toggler ui-layout-toggler-south ui-layout-toggler-open ui-layout-toggler-south-open" title="Close"></div></div></div>
+
+<div class="ui-layout-east ui-layout-pane ui-layout-pane-east" style="position: absolute; margin: 0px; left: auto; right: 0px; top: 61px; bottom: 47px; height: 637px; z-index: 0; width: 178px; display: none; visibility: visible;">Outer East</div>
+
+<div class="ui-layout-south ui-layout-pane ui-layout-pane-south" style="position: absolute; margin: 0px; top: auto; bottom: 0px; left: 0px; right: 0px; width: auto; z-index: 0; height: 19px; display: block; visibility: visible;">Outer South</div>
+
+
+<div id="" style="position: absolute; padding: 0px; margin: 0px; font-size: 1px; text-align: left; overflow: hidden; z-index: 2; cursor: n-resize; top: 55px; width: 1535px; height: 6px; left: 0px;" class="ui-layout-resizer ui-layout-resizer-north ui-layout-resizer-open ui-layout-resizer-north-open" title="Resize" aria-disabled="false"><div id="" style="position: absolute; display: block; padding: 0px; margin: 0px; overflow: hidden; text-align: center; font-size: 1px; cursor: pointer; z-index: 1; visibility: visible; width: 48px; height: 6px; left: 742px; top: 0px;" class="ui-layout-toggler ui-layout-toggler-north ui-layout-toggler-open ui-layout-toggler-north-open" title="Close"></div></div><div id="" style="position: absolute; padding: 0px; margin: 0px; font-size: 1px; text-align: left; overflow: hidden; z-index: 2; cursor: s-resize; bottom: 41px; width: 1535px; height: 6px; left: 0px;" class="ui-layout-resizer ui-layout-resizer-south ui-layout-resizer-open ui-layout-resizer-south-open" title="Resize" aria-disabled="false"><div id="" style="position: absolute; display: block; padding: 0px; margin: 0px; overflow: hidden; text-align: center; font-size: 1px; cursor: pointer; z-index: 1; visibility: visible; width: 48px; height: 6px; left: 742px; top: 0px;" class="ui-layout-toggler ui-layout-toggler-south ui-layout-toggler-open ui-layout-toggler-south-open" title="Close"></div></div><div title="Slide Open" style="cursor: pointer; position: absolute; padding: 0px; margin: 0px; font-size: 1px; text-align: left; overflow: hidden; z-index: 2; right: 0px; height: 659px; width: 6px; top: 61px;" id="" class="ui-layout-resizer ui-layout-resizer-east ui-layout-resizer-closed ui-layout-resizer-east-closed ui-draggable-disabled" aria-disabled="true"><div id="" style="position: absolute; display: block; padding: 0px; margin: 0px; overflow: hidden; text-align: center; font-size: 1px; cursor: pointer; z-index: 1; visibility: visible; height: 48px; width: 6px; top: 304px; left: 0px;" class="ui-layout-toggler ui-layout-toggler-east ui-layout-toggler-closed ui-layout-toggler-east-closed" title="Open"></div></div><embed type="application/x-unity-webapps-npapi" id="unityChromiumExtensionId" height="0" width="0" style="display: block !important;"><div id="" style="position: absolute; padding: 0px; margin: 0px; font-size: 1px; text-align: left; overflow: hidden; z-index: 2; cursor: w-resize; left: 761px; height: 659px; width: 6px; top: 61px;" class="ui-layout-resizer ui-layout-resizer-west ui-layout-resizer-open ui-layout-resizer-west-open" title="Resize" aria-disabled="false"><div id="" style="position: absolute; display: block; padding: 0px; margin: 0px; overflow: hidden; text-align: center; font-size: 1px; cursor: pointer; z-index: 1; visibility: visible; height: 48px; width: 6px; top: 304px; left: 0px;" class="ui-layout-toggler ui-layout-toggler-west ui-layout-toggler-open ui-layout-toggler-west-open" title="Close"></div></div></body></html>

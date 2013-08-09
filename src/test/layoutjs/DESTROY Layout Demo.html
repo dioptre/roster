@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!-- saved from url=(0047)http://layout.jquery-dev.net/demos/destroy.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" style="overflow: hidden; height: 100%; border: none; padding: 0px; margin: 0px;"><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+	<title>DESTROY Layout Demo</title>
+
+	<link rel="stylesheet" type="text/css" href="./DESTROY Layout Demo_files/layout-default-latest.css">
+	<style type="text/css">
+
+	/* CSS below is only for cosmetic and demo purposes */
+	body {
+		padding:		30px; /* test destroy */
+		font-family:	Arial, sans-serif;
+		*font-size:		0.85em;
+	}
+	button {
+		font-size:		1em;
+		padding:		3px 7px;
+	}
+	.ui-layout-west button {
+		width:			100%;
+		padding:		3px 2px;
+	}
+	p {
+		margin: 1em 0;
+	}
+	h3 {
+		font-size:		1em;
+		font-weight:	bold;
+		margin:			1em 0 1ex;
+	}
+
+	.ui-layout-north ,
+	.ui-layout-south ,
+	.ui-layout-west ,
+	.ui-layout-east ,
+	.ui-layout-center {
+		border:		1px dashed #999;
+		padding:	10px; /* match .ui-layout-pane padding */
+	}
+
+	.ui-layout-center .ui-layout-pane-center {
+		padding:	0;
+		overflow:	hidden;
+		}
+		.ui-layout-center h4 ,
+		.ui-layout-center h5 {
+			padding:		0;
+			margin:			10px 0;
+		}
+		.ui-layout-center .ui-layout-pane-center h4 ,
+		.ui-layout-center .ui-layout-pane-center h5 {
+			padding:		10px;
+			margin:			0;
+		}
+		.ui-layout-center .ui-layout-pane-center h4 {
+			border-bottom:	1px solid #BBB;
+			background:		#F6F6F6;
+		}
+		.ui-layout-center .ui-layout-pane-center h5 {
+			border-top:	1px solid #BBB;
+			background:		#F6F6F6;
+		}
+
+	</style>
+
+	<script type="text/javascript" src="./DESTROY Layout Demo_files/jquery-latest.js"></script>
+	<script type="text/javascript" src="./DESTROY Layout Demo_files/jquery-ui-latest.js"></script>
+	<script type="text/javascript" src="./DESTROY Layout Demo_files/jquery.layout-latest.js"></script>
+	<script type="text/javascript" src="./DESTROY Layout Demo_files/debug.js"></script>
+	<script type="text/javascript">
+
+	var outerLayout, innerLayout;
+
+	function createLayout ( containerSelector ) {
+		var name = (containerSelector === 'body' ? 'outerLayout' : 'innerLayout')
+		var $C = $(containerSelector);
+		if (!$C.data("layoutContainer"))
+			window[ name ] = $C.layout({
+				name:						name
+			,	initChildren:				false
+			,	destroyChildren:			false
+			,	stateManagement__enabled:	true // maintain state between destroy/create
+			,	includeChildren:			false
+			});
+
+		// show appropriate button
+		$('.btnCreate_' + name).hide();
+		$('.btnDestroy_'+ name).show();
+	};
+
+	function destroyLayout ( containerSelector ) {
+		var name = (containerSelector=='body' ? 'outerLayout' : 'innerLayout')
+		var $C = $(containerSelector);
+		if ($C.data("layoutContainer"))
+			$C.layout().destroy();
+
+		// show appropriate button
+		window[ name ] = null;
+		$('.btnDestroy_'+ name).hide();
+		$('.btnCreate_' + name).show();
+	};
+
+	function clearState () {
+		var $Container, Instance;
+		$.each(['body','body > .ui-layout-center'], function(idx, selector) {
+			$C = $( selector );
+			if ($C.data("layoutContainer")) {
+				Instance = $C.layout();
+				Instance.clearCookie();
+				Instance.options.cookie.autoSave = false;
+			}
+		});
+	};
+
+	function listEvents (elem) {
+		var data	= $(elem).data('events')
+		,	events	= {}
+		,	thisEvent, namespace, layout, eventName
+		;
+		for (eventName in data) {
+			if (eventName.substr(0,6) !== 'layout')
+				continue; // skip non-layout events
+			thisEvent = data[ eventName ][0];
+			namespace = thisEvent.namespace +'__'+ (eventName.substr(0,10) === 'layoutpane' ? 'pane' : 'container');
+			if (!events[ namespace ])
+				events[ namespace ] = {};
+			layout = events[ namespace ];
+			layout[ eventName ] = thisEvent.handler;
+		}
+		console.data( events, 'Layout Events', { sort: true });
+	};
+
+
+	$(document).ready(function () {
+		//createLayout('body');
+		//createLayout('body > .ui-layout-center');
+ 	});
+
+	</script>
+
+<script type="text/javascript" src="chrome-extension://pmoflmbbcfgacopiikdcpmbiellfihdg/webkitnotif-wrapper-builder.js"></script><script type="text/javascript" src="chrome-extension://pmoflmbbcfgacopiikdcpmbiellfihdg/unity-api-page-proxy-builder-gen.js"></script><script type="text/javascript" src="chrome-extension://pmoflmbbcfgacopiikdcpmbiellfihdg/unity-api-page-proxy.js"></script></head>
+<body style="zoom: 1; overflow: hidden; width: auto; height: auto; margin: 0px; position: absolute; top: 0px; bottom: 0px; left: 0px; right: 0px;" class="ui-layout-container">
+
+<p><a href="http://layout.jquery-dev.net/demos.html"><b>Go to the Demos page</b></a></p>
+
+<!-- outerLayout -->
+<div class="ui-layout-north ui-layout-pane ui-layout-pane-north" style="position: absolute; margin: 0px; top: 30px; bottom: auto; left: 30px; right: 30px; width: auto; z-index: 0; height: 33px; display: block; visibility: visible;">
+	<button class="btnCreate_outerLayout" onclick="createLayout(&#39;body&#39;)" style="display: none;">
+		CREATE outerLayout</button>
+	<button class="btnDestroy_outerLayout" onclick="destroyLayout(&#39;body&#39;)" style="">
+		DESTROY outerLayout</button>
+	&nbsp; &nbsp;
+	<button class="btnCreate_innerLayout" onclick="createLayout(&#39;body &gt; .ui-layout-center&#39;)" style="display: none;">
+		CREATE innerLayout</button>
+	<button class="btnDestroy_innerLayout" onclick="destroyLayout(&#39;body &gt; .ui-layout-center&#39;)" style="">
+		DESTROY innerLayout</button>
+	&nbsp; &nbsp;
+	<button class="btnCookie" onclick="clearState();">
+		Clear State-Cookies</button>
+</div>
+
+<div class="ui-layout-center ui-layout-container ui-layout-pane ui-layout-pane-center ui-layout-pane-hover ui-layout-pane-center-hover ui-layout-pane-open-hover ui-layout-pane-center-open-hover" style="background-color: rgb(255, 255, 221); overflow: hidden; position: absolute; margin: 0px; left: 236px; right: 236px; top: 91px; bottom: 77px; height: 577px; width: 1041px; z-index: 0; display: block; visibility: visible; background-position: initial initial; background-repeat: initial initial;">
+
+	<!-- innerLayout -->
+	<div class="ui-layout-north ui-layout-pane ui-layout-pane-north" style="position: absolute; margin: 0px; top: 10px; bottom: auto; left: 10px; right: 10px; width: auto; z-index: 0; height: 33px; display: block; visibility: visible;">
+		<button class="btnCreate_innerLayout" onclick="createLayout(&#39;body &gt; .ui-layout-center&#39;)" style="display: none;">
+			CREATE innerLayout</button>
+		<button class="btnDestroy_innerLayout" onclick="destroyLayout(&#39;body &gt; .ui-layout-center&#39;)" style="">
+			DESTROY innerLayout</button>
+	</div>
+	<div class="ui-layout-center ui-layout-pane ui-layout-pane-center ui-layout-pane-hover ui-layout-pane-center-hover ui-layout-pane-open-hover ui-layout-pane-center-open-hover" style="position: absolute; margin: 0px; left: 216px; right: 216px; top: 71px; bottom: 57px; height: 467px; width: 627px; z-index: 0; display: block; visibility: visible;">
+		<h4>Inner Center </h4>
+		<div class="ui-layout-content" style="position: relative; height: 371px; visibility: visible;">
+			Inner Center Content
+			<p>...</p><p>...</p><p>...</p>
+		</div>
+		<h5>Inner Center Footer </h5>
+	</div>
+	<div class="ui-layout-west ui-layout-pane ui-layout-pane-west" style="position: absolute; margin: 0px; left: 10px; right: auto; top: 71px; bottom: 57px; height: 447px; z-index: 0; width: 178px; display: block; visibility: visible;">  Inner West </div>
+	<div class="ui-layout-east ui-layout-pane ui-layout-pane-east" style="position: absolute; margin: 0px; left: auto; right: 10px; top: 71px; bottom: 57px; height: 447px; z-index: 0; width: 178px; display: block; visibility: visible;">  Inner East </div>
+	<div class="ui-layout-south ui-layout-pane ui-layout-pane-south" style="position: absolute; margin: 0px; top: auto; bottom: 10px; left: 10px; right: 10px; width: auto; z-index: 0; height: 19px; display: block; visibility: visible;"> Inner South </div>
+
+<div id="" style="position: absolute; padding: 0px; margin: 0px; font-size: 1px; text-align: left; overflow: hidden; z-index: 2; cursor: n-resize; top: 65px; width: 1041px; height: 6px; left: 10px;" class="ui-layout-resizer ui-layout-resizer-north ui-layout-resizer-open ui-layout-resizer-north-open" title="Resize" aria-disabled="false"><div id="" style="position: absolute; display: block; padding: 0px; margin: 0px; overflow: hidden; text-align: center; font-size: 1px; cursor: pointer; z-index: 1; visibility: visible; width: 48px; height: 6px; left: 495px; top: 0px;" class="ui-layout-toggler ui-layout-toggler-north ui-layout-toggler-open ui-layout-toggler-north-open" title="Close"></div></div><div id="" style="position: absolute; padding: 0px; margin: 0px; font-size: 1px; text-align: left; overflow: hidden; z-index: 2; cursor: s-resize; bottom: 51px; width: 1041px; height: 6px; left: 10px;" class="ui-layout-resizer ui-layout-resizer-south ui-layout-resizer-open ui-layout-resizer-south-open" title="Resize" aria-disabled="false"><div id="" style="position: absolute; display: block; padding: 0px; margin: 0px; overflow: hidden; text-align: center; font-size: 1px; cursor: pointer; z-index: 1; visibility: visible; width: 48px; height: 6px; left: 495px; top: 0px;" class="ui-layout-toggler ui-layout-toggler-south ui-layout-toggler-open ui-layout-toggler-south-open" title="Close"></div></div><div id="" style="position: absolute; padding: 0px; margin: 0px; font-size: 1px; text-align: left; overflow: hidden; z-index: 2; cursor: w-resize; left: 210px; height: 469px; width: 6px; top: 71px;" class="ui-layout-resizer ui-layout-resizer-west ui-layout-resizer-open ui-layout-resizer-west-open" title="Resize" aria-disabled="false"><div id="" style="position: absolute; display: block; padding: 0px; margin: 0px; overflow: hidden; text-align: center; font-size: 1px; cursor: pointer; z-index: 1; visibility: visible; height: 48px; width: 6px; top: 209px; left: 0px;" class="ui-layout-toggler ui-layout-toggler-west ui-layout-toggler-open ui-layout-toggler-west-open" title="Close"></div></div><div id="" style="position: absolute; padding: 0px; margin: 0px; font-size: 1px; text-align: left; overflow: hidden; z-index: 2; cursor: e-resize; right: 210px; height: 469px; width: 6px; top: 71px;" class="ui-layout-resizer ui-layout-resizer-east ui-layout-resizer-open ui-layout-resizer-east-open" title="Resize" aria-disabled="false"><div id="" style="position: absolute; display: block; padding: 0px; margin: 0px; overflow: hidden; text-align: center; font-size: 1px; cursor: pointer; z-index: 1; visibility: visible; height: 48px; width: 6px; top: 209px; left: 0px;" class="ui-layout-toggler ui-layout-toggler-east ui-layout-toggler-open ui-layout-toggler-east-open" title="Close"></div></div></div>
+
+<div class="ui-layout-west ui-layout-pane ui-layout-pane-west" style="position: absolute; margin: 0px; left: 30px; right: auto; top: 91px; bottom: 77px; height: 577px; z-index: 0; width: 178px; display: block; visibility: visible;">  Outer West
+
+	<h3>Using Layout-Instance</h3>
+	<button onclick="outerLayout.addPane(&#39;east&#39;)">Add Outer East</button><br>
+	<button onclick="outerLayout.removePane(&#39;east&#39;)">Remove Outer East</button><br>
+	<button onclick="outerLayout.removePane(&#39;east&#39;, true)">Delete Outer East</button><br>
+	<br>
+	<button onclick="innerLayout.addPane(&#39;east&#39;)">Add Inner-East</button>
+	<button onclick="innerLayout.removePane(&#39;east&#39;)">Remove Inner East</button><br>
+	<button onclick="innerLayout.removePane(&#39;east&#39;, true)">Delete Inner East</button><br>
+	<br>
+	<button onclick="listEvents(&#39;body &gt; .ui-layout-center&#39;)">List Outer Center <span style="white-space: nowrap;">Layout-Events</span></button>
+
+	<h3>Using Pane-Events</h3>
+	<button onclick="$(&#39;body &gt; .ui-layout-east&#39;).trigger(&#39;layoutpaneremove&#39;)">Remove Outer East</button><br>
+	<button onclick="$(&#39;body &gt; .ui-layout-east&#39;).trigger(&#39;layoutpaneremove&#39;, [ true ])">Delete Outer East</button><br>
+	<br>
+	<button onclick="$(&#39;body &gt; .ui-layout-center &gt; .ui-layout-east&#39;).trigger(&#39;layoutpaneremove&#39;)">Remove Inner East</button><br>
+	<button onclick="$(&#39;body &gt; .ui-layout-center &gt; .ui-layout-east&#39;).trigger(&#39;layoutpaneremove&#39;, [ true ])">Delete Inner East</button><br>
+
+</div>
+<div class="ui-layout-east ui-layout-pane ui-layout-pane-east" style="position: absolute; margin: 0px; left: auto; right: 30px; top: 91px; bottom: 77px; height: 577px; z-index: 0; width: 178px; display: block; visibility: visible;">  Outer East </div>
+<div class="ui-layout-south ui-layout-pane ui-layout-pane-south" style="position: absolute; margin: 0px; top: auto; bottom: 30px; left: 30px; right: 30px; width: auto; z-index: 0; height: 19px; display: block; visibility: visible;"> Outer South </div>
+
+<!-- Test Page Scrolling after outerLayout.destroy()
+-->
+<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+<p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p><p>...</p>
+
+
+<embed type="application/x-unity-webapps-npapi" id="unityChromiumExtensionId" height="0" width="0" style="display: block !important;"><div id="" style="position: absolute; padding: 0px; margin: 0px; font-size: 1px; text-align: left; overflow: hidden; z-index: 2; cursor: n-resize; top: 85px; width: 1475px; height: 6px; left: 30px;" class="ui-layout-resizer ui-layout-resizer-north ui-layout-resizer-open ui-layout-resizer-north-open" title="Resize" aria-disabled="false"><div id="" style="position: absolute; display: block; padding: 0px; margin: 0px; overflow: hidden; text-align: center; font-size: 1px; cursor: pointer; z-index: 1; visibility: visible; width: 48px; height: 6px; left: 712px; top: 0px;" class="ui-layout-toggler ui-layout-toggler-north ui-layout-toggler-open ui-layout-toggler-north-open" title="Close"></div></div><div id="" style="position: absolute; padding: 0px; margin: 0px; font-size: 1px; text-align: left; overflow: hidden; z-index: 2; cursor: s-resize; bottom: 71px; width: 1475px; height: 6px; left: 30px;" class="ui-layout-resizer ui-layout-resizer-south ui-layout-resizer-open ui-layout-resizer-south-open" title="Resize" aria-disabled="false"><div id="" style="position: absolute; display: block; padding: 0px; margin: 0px; overflow: hidden; text-align: center; font-size: 1px; cursor: pointer; z-index: 1; visibility: visible; width: 48px; height: 6px; left: 712px; top: 0px;" class="ui-layout-toggler ui-layout-toggler-south ui-layout-toggler-open ui-layout-toggler-south-open" title="Close"></div></div><div id="" style="position: absolute; padding: 0px; margin: 0px; font-size: 1px; text-align: left; overflow: hidden; z-index: 2; cursor: w-resize; left: 230px; height: 599px; width: 6px; top: 91px;" class="ui-layout-resizer ui-layout-resizer-west ui-layout-resizer-open ui-layout-resizer-west-open" title="Resize" aria-disabled="false"><div id="" style="position: absolute; display: block; padding: 0px; margin: 0px; overflow: hidden; text-align: center; font-size: 1px; cursor: pointer; z-index: 1; visibility: visible; height: 48px; width: 6px; top: 274px; left: 0px;" class="ui-layout-toggler ui-layout-toggler-west ui-layout-toggler-open ui-layout-toggler-west-open" title="Close"></div></div><div id="" style="position: absolute; padding: 0px; margin: 0px; font-size: 1px; text-align: left; overflow: hidden; z-index: 2; cursor: e-resize; right: 230px; height: 599px; width: 6px; top: 91px;" class="ui-layout-resizer ui-layout-resizer-east ui-layout-resizer-open ui-layout-resizer-east-open" title="Resize" aria-disabled="false"><div id="" style="position: absolute; display: block; padding: 0px; margin: 0px; overflow: hidden; text-align: center; font-size: 1px; cursor: pointer; z-index: 1; visibility: visible; height: 48px; width: 6px; top: 274px; left: 0px;" class="ui-layout-toggler ui-layout-toggler-east ui-layout-toggler-open ui-layout-toggler-east-open" title="Close"></div></div></body></html>

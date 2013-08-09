@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CustomTheme platform="ORX" version="ORX1" url="http://bindtuning.com/cms/orchard/orchard-1/theme/Terra/page/Inner-Boxed/customize" browser="Chrome25.0" trial="false" name="Terra">
+  <Parameter name="tuningColor1" value="rgb(223, 57, 133)" />
+  <Parameter name="tuningColor2" value="rgb(255, 255, 255)" />
+  <Parameter name="tuningColor3" value="rgb(248, 241, 42)" />
+  <Parameter name="tuningColor4" value="rgb(224, 123, 22)" />
+  <Parameter name="tuningColor5" value="rgb(27, 225, 91)" />
+  <Parameter name="tuningColor6" value="rgb(30, 137, 252)" />
+  <Parameter name="tuningnavbarH" value="#1E89FC" />
+  <Parameter name="tuningtextColor" value="#050505" />
+  <Parameter name="tuningnavbarHText" value="#000000" />
+  <Parameter name="tuningnavbarHSubmenuText" value="#000000" />
+  <Parameter name="tuningbtnBackground" value="#1BE15B" />
+</CustomTheme>
