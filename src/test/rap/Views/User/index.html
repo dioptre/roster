@@ -288,16 +288,20 @@ function requiredFieldValidator(value) {
 									var gridHdrH	= $pane.children('.slick-header').outerHeight()
 									,	$gridList	= $pane.children('.slick-viewport') ;
 									$gridList.height( state.innerHeight - gridHdrH );
+                                    myGrid.resizeCanvas();
 								}
 		,	east__onresize:		function (pane, $pane, state, options) {
 									var gridHdrH	= $pane.children('.slick-header').outerHeight()
 									,	$gridList	= $pane.children('.slick-viewport') ;
 									$gridList.height( state.innerHeight - gridHdrH );
+                                    myGrid2.resizeCanvas();
 								}
 		,	south__onresize:		function (pane, $pane, state, options) {
 									var gridHdrH	= $pane.children('.slick-header').outerHeight()
 									,	$gridList	= $pane.children('.slick-viewport') ;
 									$gridList.height( state.innerHeight - gridHdrH );
+                                    myGrid3.resizeCanvas();
+
 								}
 		,	north__fxName:		"slide" //"slideOffscreen" // plug-in - like slide, but does not 'hide' panes
 		});
