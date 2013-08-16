@@ -9,12 +9,11 @@
 <link href='/Scripts/vendor/fullcalendar/fullcalendar.print.css' rel='stylesheet' media='print' />
 
 <script src='/Scripts/vendor/jquery/jquery.js'></script>
-<script src='/Scripts/vendor/jquery.ui/jquery-ui.js'></script>-->
-<script src='/Scripts/vendor/fullcalendar/fullcalendar.min.js'></script>
+<script src='/Scripts/vendor/jquery.ui/jquery.ui.widget.js'></script>
+<script src='/Scripts/vendor/jquery.ui/jquery.ui.mouse.js'></script>
+<script src='/Scripts/vendor/jquery.ui/jquery.ui.sortable.js'></script>
 <script src="/Scripts/vendor/jquery.layout/jquery.layout.js"></script>
 <script src="/Scripts/vendor/jquery.layout/jquery.layout.slideOffscreen-1.1.js"></script>
-
-
 <script src="/Scripts/vendor/firebug/firebugx.js"></script>
 <script src="/Scripts/vendor/jquery.event/jquery.event.drag-2.2.js"></script>
 <script src="/Scripts/vendor/jquery.event/jquery.event.drop-2.2.js"></script>
@@ -23,6 +22,12 @@
 <script src="/Scripts/vendor/slickgrid/slick.editors.js"></script>
 <script src="/Scripts/vendor/slickgrid/slick.grid.js"></script>
 <script src="/Scripts/vendor/slickgrid/slick.dataview.js"></script>
+
+<!--<script src='/Scripts/vendor/jquery.ui/jquery-ui-1.10.2.custom.min.js'></script>-->
+<script src='/Scripts/vendor/jquery.ui/jquery.ui.core.js'></script>
+<script src='/Scripts/vendor/jquery.ui/jquery.ui.resizable.js'></script>
+<!--<script src='/Scripts/vendor/jquery.ui/jquery.ui.draggable.js'></script>-->
+<script src='/Scripts/vendor/fullcalendar/fullcalendar.js'></script>
 
 <script>
 	// recreate $.browser using $.layout.browser for backwards compatibility
@@ -289,20 +294,32 @@ function requiredFieldValidator(value) {
 									,	$gridList	= $pane.children('.slick-viewport') ;
 									$gridList.height( state.innerHeight - gridHdrH );
                                     myGrid.resizeCanvas();
+                                    myGrid.invalidate();
+                                    $('#calendar').fullCalendar('render');
 								}
+        ,   west__onclose:       function () {$('#calendar').fullCalendar('render');}
+        ,   west__onopen:       function () {$('#calendar').fullCalendar('render');}
 		,	east__onresize:		function (pane, $pane, state, options) {
 									var gridHdrH	= $pane.children('.slick-header').outerHeight()
 									,	$gridList	= $pane.children('.slick-viewport') ;
 									$gridList.height( state.innerHeight - gridHdrH );
                                     myGrid2.resizeCanvas();
+                                    myGrid2.invalidate();
+                                    $('#calendar').fullCalendar('render');
 								}
+        ,   east__onclose:       function () {$('#calendar').fullCalendar('render');}
+        ,   east__onopen:       function () {$('#calendar').fullCalendar('render');}
 		,	south__onresize:		function (pane, $pane, state, options) {
 									var gridHdrH	= $pane.children('.slick-header').outerHeight()
 									,	$gridList	= $pane.children('.slick-viewport') ;
 									$gridList.height( state.innerHeight - gridHdrH );
                                     myGrid3.resizeCanvas();
+                                    myGrid3.invalidate();
+                                    $('#calendar').fullCalendar('render');
 
 								}
+        ,   south__onclose:       function () {$('#calendar').fullCalendar('render');}
+        ,   south__onopen:       function () {$('#calendar').fullCalendar('render');}
 		,	north__fxName:		"slide" //"slideOffscreen" // plug-in - like slide, but does not 'hide' panes
 		});
 
@@ -310,6 +327,7 @@ function requiredFieldValidator(value) {
 		myGrid2 = new Slick.Grid( myLayout.panes.east, gridData, gridColumns, gridOptions );
 		myGrid3 = new Slick.Grid( myLayout.panes.south, gridData, gridColumns, gridOptions );
 		$('body > H2.loading').hide(); // hide Loading msg
+        $('#calendar').fullCalendar('render');
 
 	});
 
