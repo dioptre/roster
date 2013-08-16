@@ -145,7 +145,7 @@ border: 1px solid #00F !important;
 background-color: #00F !important;
 }
 .ui-layout-center , .ui-layout-west,
-	.ui-layout-east ,
+	.ui-layout-east , .ui-layout-south, .ui-layout-south .ui-layout-content, .ui-layout-west .ui-layout-content
 	.ui-layout-east .ui-layout-content {
 		padding:		0;
 		overflow:		hidden;
@@ -274,31 +274,37 @@ function requiredFieldValidator(value) {
 		// create the layout - with data-table wrapper as the layout-content element
 		myLayout = $('body').layout({
 			livePaneResizing:	true
-		,	west__initClosed:	false
-		,	east__spacing_closed: 20
-		,	east__size:			.50
+		,	north__initClosed:	false
+		,	north__spacing_closed: 20
+		,	east__size:		200
 		,	east__minSize:		200
+		,	west__size:		200
+		,	west__minSize:		200
 		,	center__minWidth:	200
 		,	center__minHeight:	300
-		,	center__onresize:	function (pane, $pane, state, options) {
+		,	south__size:		200
+		,	south__minSize:		50
+		,	west__onresize:	function (pane, $pane, state, options) {
 									var gridHdrH	= $pane.children('.slick-header').outerHeight()
 									,	$gridList	= $pane.children('.slick-viewport') ;
 									$gridList.height( state.innerHeight - gridHdrH );
 								}
 		,	east__onresize:		function (pane, $pane, state, options) {
-									var	$content	= $pane.children('.ui-layout-content')
-									,	gridHdrH	= $content.children('.slick-header').outerHeight()
-									,	paneHdrH	= $pane.children(':first').outerHeight()
-									,	paneFtrH	= $pane.children(':last').outerHeight()
-									,	$gridList	= $content.children('.slick-viewport') ;
-									$gridList.height( state.innerHeight - paneHdrH - paneFtrH - gridHdrH );
+									var gridHdrH	= $pane.children('.slick-header').outerHeight()
+									,	$gridList	= $pane.children('.slick-viewport') ;
+									$gridList.height( state.innerHeight - gridHdrH );
 								}
-		,	east__fxName:		"slideOffscreen" // plug-in - like slide, but does not 'hide' panes
+		,	south__onresize:		function (pane, $pane, state, options) {
+									var gridHdrH	= $pane.children('.slick-header').outerHeight()
+									,	$gridList	= $pane.children('.slick-viewport') ;
+									$gridList.height( state.innerHeight - gridHdrH );
+								}
+		,	north__fxName:		"slide" //"slideOffscreen" // plug-in - like slide, but does not 'hide' panes
 		});
 
 		myGrid  = new Slick.Grid( myLayout.panes.west,  gridData, gridColumns, gridOptions );
 		myGrid2 = new Slick.Grid( myLayout.panes.east, gridData, gridColumns, gridOptions );
-
+		myGrid3 = new Slick.Grid( myLayout.panes.south, gridData, gridColumns, gridOptions );
 		$('body > H2.loading').hide(); // hide Loading msg
 
 	});
