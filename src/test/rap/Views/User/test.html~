@@ -15,14 +15,11 @@
 <script src='/Scripts/vendor/jquery.ui/jquery.ui.resizable.js'></script>
 <script src='/Scripts/vendor/jquery.ui/jquery.ui.sortable.js'></script>
 <script src='/Scripts/vendor/jquery.ui/jquery.ui.draggable.js'></script>
+<script src='/Scripts/vendor/jquery.ui/jquery.ui.droppable.js'></script>
 
 <script src='/Scripts/vendor/fullcalendar/fullcalendar.js'></script>
 
-<script src="/Scripts/vendor/jquery.layout/jquery.layout.js"></script>
-<script src="/Scripts/vendor/jquery.layout/jquery.layout.slideOffscreen-1.1.js"></script>
 
-<script src="/Scripts/vendor/jquery.event/jquery.event.drag.custom.js"></script>
-<script src="/Scripts/vendor/firebug/firebugx.js"></script>
 
 <script src="/Scripts/vendor/slickgrid/slick.core.js"></script>
 <script src="/Scripts/vendor/slickgrid/slick.formatters.js"></script>
@@ -31,8 +28,7 @@
 <script src="/Scripts/vendor/slickgrid/slick.dataview.js"></script>
 
 <script>
-	// recreate $.browser using $.layout.browser for backwards compatibility
-	if (!$.browser) $.browser = $.layout.browser;
+
 
 	$(function() {
 		//$("#tabs").tabs();
@@ -194,21 +190,9 @@ background-color: #00F !important;
 </style>
 </head>
 <body>
-<div id="mainPanel" class="ui-layout-center"><div id='calendar'></div></div>
-<div class="ui-layout-north">MyRoster.com.au</div>
-<div class="ui-layout-south">South</div>
-<div class="ui-layout-east"><div class="ui-widget-header ui-state-active">East Header</div></div>
-<div class="ui-layout-west">West</div>
-<div id="tabs" style="display:none;">
-  <ul>
-    <li><a href="#tabs-1">Nunc tincidunt</a></li>
-    <li><a href="#tabs-2">Proin dolor</a></li>
-    <li><a href="#tabs-3">Aenean lacinia</a></li>
-  </ul>
-  <div id="tabs-1"></div>
-  <div id="tabs-2"><p>test2</p></div>
-  <div id="tabs-3"><p>test2</p></div>
-</div>
+<div id='calendar'></div>
+<div id='grid' style="height:400px;"></div>
+
 
 
 <script>
@@ -275,64 +259,15 @@ function requiredFieldValidator(value) {
 
 	var myLayout;
 
-	$(document).ready(function () {
-
-		// create the layout - with data-table wrapper as the layout-content element
-		myLayout = $('body').layout({
-			livePaneResizing:	true
-		,	north__initClosed:	true
-		,	south__initClosed:	true
-		,	east__initClosed:	true
-		,	north__spacing_closed: 	5
-		,	east__size:		200
-		,	east__minSize:		200
-		,	west__size:		200
-		,	west__minSize:		200
-		,	center__minWidth:	200
-		,	center__minHeight:	300
-		,	south__size:		200
-		,	south__minSize:		50
-		,	west__onresize:	function (pane, $pane, state, options) {
-									var gridHdrH	= $pane.children('.slick-header').outerHeight()
-									,	$gridList	= $pane.children('.slick-viewport') ;
-									$gridList.height( state.innerHeight - gridHdrH );
-                                    myGrid.resizeCanvas();
-                                    myGrid.invalidate();
-                                    $('#calendar').fullCalendar('render');
-								}
-        ,   west__onclose:       function () {$('#calendar').fullCalendar('render');}
-        ,   west__onopen:       function () {$('#calendar').fullCalendar('render');}
-		,	east__onresize:		function (pane, $pane, state, options) {
-									var gridHdrH	= $pane.children('.slick-header').outerHeight()
-									,	$gridList	= $pane.children('.slick-viewport') ;
-									$gridList.height( state.innerHeight - gridHdrH );
-                                    myGrid2.resizeCanvas();
-                                    myGrid2.invalidate();
-                                    $('#calendar').fullCalendar('render');
-								}
-        ,   east__onclose:       function () {$('#calendar').fullCalendar('render');}
-        ,   east__onopen:       function () {$('#calendar').fullCalendar('render');}
-		,	south__onresize:		function (pane, $pane, state, options) {
-									var gridHdrH	= $pane.children('.slick-header').outerHeight()
-									,	$gridList	= $pane.children('.slick-viewport') ;
-									$gridList.height( state.innerHeight - gridHdrH );
-                                    myGrid3.resizeCanvas();
-                                    myGrid3.invalidate();
-                                    $('#calendar').fullCalendar('render');
-
-								}
-        ,   south__onclose:       function () {$('#calendar').fullCalendar('render');}
-        ,   south__onopen:       function () {$('#calendar').fullCalendar('render');}
-		,	north__fxName:		"slide" //"slideOffscreen" // plug-in - like slide, but does not 'hide' panes
-		});
-
-		myGrid  = new Slick.Grid( myLayout.panes.west,  gridData, gridColumns, gridOptions );
-		myGrid2 = new Slick.Grid( myLayout.panes.east, gridData, gridColumns, gridOptions );
-		myGrid3 = new Slick.Grid( myLayout.panes.south, gridData, gridColumns, gridOptions );
+	
+		 $('#calendar').fullCalendar('render');
+		myGrid  = new Slick.Grid( $('#grid'),  gridData, gridColumns, gridOptions );
+		///myGrid2 = new Slick.Grid( myLayout.panes.east, gridData, gridColumns, gridOptions );
+		//myGrid3 = new Slick.Grid( myLayout.panes.south, gridData, gridColumns, gridOptions );
 		$('body > H2.loading').hide(); // hide Loading msg
-        $('#calendar').fullCalendar('render');
+       
 
-	});
+	
 
 </script>
 </body>
