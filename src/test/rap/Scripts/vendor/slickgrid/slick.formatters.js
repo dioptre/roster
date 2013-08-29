@@ -16,10 +16,15 @@
         "PercentComplete": PercentCompleteFormatter,
         "PercentCompleteBar": PercentCompleteBarFormatter,
         "YesNo": YesNoFormatter,
-        "Checkmark": CheckmarkFormatter
+        "Checkmark": CheckmarkFormatter,
+	"Date": DateFormatter
       }
     }
   });
+
+  function DateFormatter(row, cell, value, columnDef, dataContext) {
+    return value.getDate()+"/"+(value.getMonth()+1)+"/"+value.getFullYear();
+  }
 
   function PercentCompleteFormatter(row, cell, value, columnDef, dataContext) {
     if (value == null || value === "") {
