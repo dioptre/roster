@@ -1,0 +1,71 @@
+var expedit = {
+	ticks: function (conv) {
+	    if (!conv)
+	        conv = new Date();
+	    return ((conv.getTime() * 10000) + 621355968000000000);
+	},
+
+	newGuid: function () {
+	    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+		var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+		return v.toString(16);
+	    });
+	},
+
+	newComb: function newComb(date) {
+	    if (!date)
+		    date = new Date();
+	    var now = expedit.ticks(date).toString(16).substring(0, 15).split('').reverse().join('');
+	    return 'xxxxxxxx-xxxx-4xxx-y'.replace(/[xy]/g, function (c) {
+		var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+		return v.toString(16);
+	    }) + now.substring(0, 3) + '-' + now.substring(3, 15);
+	},
+
+	user: function (name, id, session, licenses) {
+	    this.name = name;
+	    this.id = id || expedit.newComb();
+	    this.licenses = licenses;
+	    this.session = session;
+	},
+
+	license: function (name, id, key, signatory, checksum)
+	{
+	    this.name = name;
+	    this.id = id;
+	    this.key = key;
+	    this.signatory = signatory;
+	    this.checksum = checksum;
+	},
+
+	session: function(name, id, created, expiry, destination, priority)
+	{
+	    var tempDate = new Date();
+	    this.name = name;
+	    this.id = id || expedit.newComb(tempDate);
+	    this.created = created || tempDate;
+	    this.expiry = expiry;
+	    this.priority = priority;    
+	},
+
+	location: function (name, id, easting, northing, elevation) {
+	    this.name = name;
+	    this.id = id || expedit.newComb();
+	    this.easting = easting;
+	    this.northing = northing;
+	    this.elevation = elevation;
+	},
+
+    	matrixTrue: [[0, 1], [0], [true]],
+	matrixFalse: [[0, 1], [0], [false]],
+	type: {name: 'expedit', version: '0.0.0'}
+}
+expedit.options = {
+	currentSession: new expedit.session('Unknown Session'),
+	currentUser: new expedit.user('Unknown User', null, expedit.currentSession),
+	currentLocation: new expedit.location('Unknown Location', 'fafa6852-460d-4eea-a000-79717b5d1158'),
+}
+expedit.options.metadata = [];
+expedit.options.metadata['unitResolution'] = 30 * 60 * 10000000; //30min*60sec*(seconds)*100ns
+expedit.options.metadata['culture']= 'en-AU';
+

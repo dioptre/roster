@@ -21,8 +21,8 @@
 <script src="/Scripts/vendor/jquery.layout/jquery.layout.js"></script>
 <script src="/Scripts/vendor/jquery.layout/jquery.layout.slideOffscreen-1.1.js"></script>
 
-<script src="/Scripts/vendor/jquery.event/jquery.event.drag-2.2.js"></script>
-<!--<script src="/Scripts/vendor/jquery.event/jquery.event.drag.custom.js"></script>-->
+<!--<script src="/Scripts/vendor/jquery.event/jquery.event.drag-2.2.js"></script>-->
+<script src="/Scripts/vendor/jquery.event/jquery.event.drag.custom.js"></script>
 <script src="/Scripts/vendor/firebug/firebugx.js"></script>
 
 <script src="/Scripts/vendor/slickgrid/slick.core.js"></script>
@@ -30,6 +30,9 @@
 <script src="/Scripts/vendor/slickgrid/slick.editors.js"></script>
 <script src="/Scripts/vendor/slickgrid/slick.grid.js"></script>
 <script src="/Scripts/vendor/slickgrid/slick.dataview.js"></script>
+
+<script src="/Scripts/expedit/expedit.js"></script>
+<!--<script src="/Scripts/expedit/roster.js"></script>-->
 
 <script>
 	// recreate $.browser using $.layout.browser for backwards compatibility
