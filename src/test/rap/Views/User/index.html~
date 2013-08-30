@@ -21,7 +21,8 @@
 <script src="/Scripts/vendor/jquery.layout/jquery.layout.js"></script>
 <script src="/Scripts/vendor/jquery.layout/jquery.layout.slideOffscreen-1.1.js"></script>
 
-<script src="/Scripts/vendor/jquery.event/jquery.event.drag.custom.js"></script>
+<script src="/Scripts/vendor/jquery.event/jquery.event.drag-2.2.js"></script>
+<!--<script src="/Scripts/vendor/jquery.event/jquery.event.drag.custom.js"></script>-->
 <script src="/Scripts/vendor/firebug/firebugx.js"></script>
 
 <script src="/Scripts/vendor/slickgrid/slick.core.js"></script>
@@ -256,7 +257,7 @@ function requiredFieldValidator(value) {
 			title:				"Task " + i
 		,	duration:			"5 days"
 		,	percentComplete:	Math.round(Math.random() * 100)
-		,	start:				"/Date(1230764400000)/"
+		,	start:				new Date(1230764400000) //Milliseconds after 1/1/70
 		,	finish:				"01/05/2009"
 		,	effortDriven:		(i % 5 == 0)
 		,	c7:					"C7-"  + i

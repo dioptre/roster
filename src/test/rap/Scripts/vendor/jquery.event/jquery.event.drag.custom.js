@@ -119,8 +119,12 @@ function handler ( event ){
 // set event type to custom value, and handle it
 function hijack ( event, type, elem ){
 	var handlers = [];
+	handlers.delegateCount = 1
 	event.type = type; // force the event type
-	var result = $.event.handlers.call( elem, handlers.push(event) );
+	var result = jQuery.event.trigger(event,null,elem,false);
+	//var result = $.event.dispatch.call( elem, event );
+	//handlers.push(event)
+	//var result = $.event.handlers.call( elem, handlers );
 	return result===false ? false : result || event.result;
 	};
 

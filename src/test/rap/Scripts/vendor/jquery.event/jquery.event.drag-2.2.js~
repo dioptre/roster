@@ -97,7 +97,7 @@ drag = $special.drag = {
 		// enable text selection
 		drag.textselect( true ); 
 		// un-prevent image dragging in IE...
-		if (this.detachEvent ) 
+		if (true || this.detachEvent ) 
 			this.detachEvent("ondragstart", drag.dontstart ); 
 	},
 		
