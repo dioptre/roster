@@ -56,16 +56,13 @@ var expedit = {
 	    this.elevation = elevation;
 	},
 
-    	matrixTrue: [[0, 1], [0], [true]],
+    matrixTrue: [[0, 1], [0], [true]],
 	matrixFalse: [[0, 1], [0], [false]],
 	type: {name: 'expedit', version: '0.0.0'}
 }
-expedit.options = {
-	currentSession: new expedit.session('Unknown Session'),
-	currentUser: new expedit.user('Unknown User', null, expedit.currentSession),
-	currentLocation: new expedit.location('Unknown Location', 'fafa6852-460d-4eea-a000-79717b5d1158'),
+expedit.current = {
+	user: new expedit.user('Unknown User', null, new expedit.session('Unknown Session')),
+	location: new expedit.location('Unknown Location', 'fafa6852-460d-4eea-a000-79717b5d1158'),
+    culture: 'en-AU',
+    timeResolution: 30 * 60 * 10000000 //30min*60sec*(seconds)*100ns
 }
-expedit.options.metadata = [];
-expedit.options.metadata['unitResolution'] = 30 * 60 * 10000000; //30min*60sec*(seconds)*100ns
-expedit.options.metadata['culture']= 'en-AU';
-

@@ -53,7 +53,7 @@ expedit.rosters = {
 	    this.priority = priority | 0;
 	    this.capacities = capacities || [];
 	    this.availability = availability || expedit.matrixTrue;
-	    this.geolocation = geolocation || expedit.options.currentLocation;
+	    this.geolocation = geolocation || expedit.current.location;
 	    this.getIndividualCost = getIndividualCost;
 	    function getIndividualCost() //aggregate costs
 	    {
@@ -91,7 +91,7 @@ expedit.rosters = {
 	    this.geolocation = geolocation;
 	},
 
-	solution: function (name, id, min, max, costs,solutionType, iterations, confidence, duration, eta, priority, allocations) {
+	solution: function (name, id, min, max, costs,solutionType, iterations, confidence, duration, eta, priority, allocations, completed) {
 	    this.name = name;
 	    this.id = id || expedit.newComb();
 	    this.min = min;
@@ -104,10 +104,19 @@ expedit.rosters = {
 	    this.eta = eta; //date solved
 	    this.priority = priority | 0;
 	    this.allocations = allocations || [];
+        this.completed = completed || false;
 	},
 
-	roster: function (user,subscription,problem,assets,solutions) {
-	 		
+	roster: function (name, id, user, subscription, problem, costType, assetGroup, assets, solutions) {
+	    this.id = id || expedit.newComb();
+        this.name = name || 'Unknown Roster';
+        this.user = user || expedit.current.user;
+        this.subscription = subscription || new expedit.rosters.subscription('Unknown Subscription');
+        this.problem = problem || new expedit.rosters.problem('Unknown Problem');
+        this.assets = assets || [];
+        this.solutions = solutions || [new expedit.rosters.solution('Unknown Solution')];
+        this.costType = costType || expedit.rosters.defaults.costTypes[0];
+        this.assetGroup = assetGroup || expedit.rosters.defaults.assets.start;
 	},
 
 	type: {name: 'expedit.roster', version: '0.0.0'}         
@@ -125,16 +134,7 @@ expedit.rosters.defaults = {
 expedit.rosters.defaults.assets = [];
 expedit.rosters.defaults.assets['root'] = [expedit.rosters.defaults.fixed, expedit.rosters.defaults.movable, expedit.rosters.defaults.work, expedit.rosters.defaults.material,expedit.rosters.defaults.cost];
 expedit.rosters.defaults.assets['start'] = [expedit.rosters.defaults.fixed, expedit.rosters.defaults.movable, expedit.rosters.defaults.work, expedit.rosters.defaults.material, expedit.rosters.defaults.cost];
-
-expedit.rosters.options = {
-	currentCostType: expedit.rosters.defaults.costTypes[0],
-	currentProblem: new expedit.rosters.problem('Unknown Problem'),
-	currentSolutions: [new expedit.rosters.solution('Unknown Solution')],
-	currentAssetGroup: expedit.rosters.defaults.assets.start,
-	currentSubscription: new expedit.rosters.subscription('Unknown Subscription')
-};
-expedit.rosters.instances = [new expedit.rosters.roster()]; //TODO
-
+expedit.rosters.current = new expedit.rosters.roster();
 //now load up solutions and real assets
 //also load up default templates for asset types [ex. rn's may have specific schedules] constraints and avail and capacity
 //also need a method to convert allocation to blocks
