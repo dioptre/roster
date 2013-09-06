@@ -22,38 +22,44 @@ var expedit = {
 	    }) + now.substring(0, 3) + '-' + now.substring(3, 15);
 	},
 
-	user: function (name, id, session, licenses) {
-	    this.name = name;
-	    this.id = id || expedit.newComb();
-	    this.licenses = licenses;
-	    this.session = session;
+	user: function (args) {
+	    if (!args)
+	        args = {};
+	    this.name = args.name;
+	    this.id = args.id || expedit.newComb();
+	    this.licenses = args.licenses;
+	    this.session = args.session;
 	},
 
-	license: function (name, id, key, signatory, checksum)
-	{
-	    this.name = name;
-	    this.id = id;
-	    this.key = key;
-	    this.signatory = signatory;
-	    this.checksum = checksum;
+	license: function (args) {
+	    if (!args)
+	        args = {};
+	    this.name = args.name;
+	    this.id = args.id;
+	    this.key = args.key;
+	    this.signatory = args.signatory;
+	    this.checksum = args.checksum;
 	},
 
-	session: function(name, id, created, expiry, destination, priority)
-	{
+	session: function(args) {
+	    if (!args)
+	        args = {};
 	    var tempDate = new Date();
-	    this.name = name;
-	    this.id = id || expedit.newComb(tempDate);
-	    this.created = created || tempDate;
-	    this.expiry = expiry;
-	    this.priority = priority;    
+	    this.name = args.name;
+	    this.id = args.id || expedit.newComb(tempDate);
+	    this.created = args.created || tempDate;
+	    this.expiry = args.expiry;
+	    this.priority = args.priority;    
 	},
 
-	location: function (name, id, easting, northing, elevation) {
-	    this.name = name;
-	    this.id = id || expedit.newComb();
-	    this.easting = easting;
-	    this.northing = northing;
-	    this.elevation = elevation;
+	location: function (args) {
+	    if (!args)
+	        args = {};
+	    this.name = args.name;
+	    this.id = args.id || expedit.newComb();
+	    this.easting = args.easting;
+	    this.northing = args.northing;
+	    this.elevation = args.elevation;
 	},
 
     matrixTrue: [[0, 1], [0], [true]],
@@ -61,8 +67,8 @@ var expedit = {
 	type: {name: 'expedit', version: '0.0.0'}
 }
 expedit.current = {
-	user: new expedit.user('Unknown User', null, new expedit.session('Unknown Session')),
-	location: new expedit.location('Unknown Location', 'fafa6852-460d-4eea-a000-79717b5d1158'),
+    user: new expedit.user({name: 'Unknown User', session: new expedit.session({name: 'Unknown Session'})}),
+	location: new expedit.location({name: 'Unknown Location', id: 'fafa6852-460d-4eea-a000-79717b5d1158'}),
     culture: 'en-AU',
     timeResolution: 30 * 60 * 10000000 //30min*60sec*(seconds)*100ns
 }
