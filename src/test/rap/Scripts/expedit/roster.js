@@ -152,6 +152,9 @@ expedit.rosters = {
 	    this.id = args.id || expedit.newComb();
         this.name = args.name;
         this.user = args.user;
+		this.location = args.location;
+		this.culture = args.culture;
+		this.timeResolution = args.timeResolution;
         this.subscription = args.subscription;
         this.problem = args.problem; 
         this.assets = args.assets; 
@@ -187,6 +190,9 @@ expedit.rosters.test = new expedit.rosters.roster({
          name: 'Unknown'
         ,id: expedit.newComb()
         ,user: expedit.current.user
+		,location: expedit.current.location
+		,culture: expedit.current.culture
+		,timeResolution: expedit.current.timeResolution
         ,subscription: new expedit.rosters.subscription({
             name: 'Unknown'
             ,id: expedit.newComb()
