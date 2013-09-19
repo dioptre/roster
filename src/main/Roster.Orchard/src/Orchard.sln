@@ -1,7 +1,5 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.20617.1 PREVIEW
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{E9C9F120-07BA-4DFB-B9C3-3AFB9D44C9D5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{74E681ED-FECC-4034-B9BD-01B0BB1BDECA}"
@@ -147,6 +145,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpgradeTo16", "Orchard.Web\Modules\UpgradeTo16\UpgradeTo16.csproj", "{8A9FDB57-342D-49C2-BAFC-D885AAE5CC7C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EXPEDIT.Roster", "Orchard.Web\Modules\EXPEDIT.Roster\EXPEDIT.Roster.csproj", "{E27E9651-906B-4BB5-8052-648AA0F1F087}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EXPEDIT.Utils", "..\..\..\..\..\utils\src\main\EXPEDIT.Utils\EXPEDIT.Utils.csproj", "{72BA3616-FD5F-4120-9BFD-9E06CD08AB65}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -819,6 +819,16 @@ Global
 		{E27E9651-906B-4BB5-8052-648AA0F1F087}.FxCop|Any CPU.ActiveCfg = Release|Any CPU
 		{E27E9651-906B-4BB5-8052-648AA0F1F087}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E27E9651-906B-4BB5-8052-648AA0F1F087}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72BA3616-FD5F-4120-9BFD-9E06CD08AB65}.CodeCoverage|Any CPU.ActiveCfg = Release|Any CPU
+		{72BA3616-FD5F-4120-9BFD-9E06CD08AB65}.CodeCoverage|Any CPU.Build.0 = Release|Any CPU
+		{72BA3616-FD5F-4120-9BFD-9E06CD08AB65}.Coverage|Any CPU.ActiveCfg = Release|Any CPU
+		{72BA3616-FD5F-4120-9BFD-9E06CD08AB65}.Coverage|Any CPU.Build.0 = Release|Any CPU
+		{72BA3616-FD5F-4120-9BFD-9E06CD08AB65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72BA3616-FD5F-4120-9BFD-9E06CD08AB65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72BA3616-FD5F-4120-9BFD-9E06CD08AB65}.FxCop|Any CPU.ActiveCfg = Release|Any CPU
+		{72BA3616-FD5F-4120-9BFD-9E06CD08AB65}.FxCop|Any CPU.Build.0 = Release|Any CPU
+		{72BA3616-FD5F-4120-9BFD-9E06CD08AB65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72BA3616-FD5F-4120-9BFD-9E06CD08AB65}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
