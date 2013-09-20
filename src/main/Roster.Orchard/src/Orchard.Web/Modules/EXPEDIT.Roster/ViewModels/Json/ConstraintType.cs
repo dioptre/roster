@@ -16,7 +16,7 @@ namespace EXPEDIT.Roster.ViewModels.Json
         public string Name { get; set; }
 
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public Guid Id { get; set; }
     }
 
 }

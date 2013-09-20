@@ -9,35 +9,9 @@ using Newtonsoft.Json.Linq;
 namespace EXPEDIT.Roster.ViewModels.Json
 {
 
-    public class VirtualAsset
+    public class VirtualAsset : Asset
     {
 
-        [JsonProperty("name")]
-        public string Name { get; set; }
-
-        [JsonProperty("id")]
-        public string Id { get; set; }
-
-        [JsonProperty("antecedents")]
-        public object[] Antecedents { get; set; }
-
-        [JsonProperty("constraints")]
-        public object[] Constraints { get; set; }
-
-        [JsonProperty("costs")]
-        public object[] Costs { get; set; }
-
-        [JsonProperty("priority")]
-        public int Priority { get; set; }
-
-        [JsonProperty("capacities")]
-        public object[] Capacities { get; set; }
-
-        [JsonProperty("availability")]
-        public object[][] Availability { get; set; }
-
-        [JsonProperty("assetGroups")]
-        public object[] AssetGroups { get; set; }
     }
 
 }

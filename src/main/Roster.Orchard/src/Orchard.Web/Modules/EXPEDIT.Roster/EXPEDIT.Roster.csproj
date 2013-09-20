@@ -12,7 +12,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>EXPEDIT.Roster</RootNamespace>
     <AssemblyName>EXPEDIT.Roster</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -34,6 +34,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -43,11 +44,16 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac, Version=2.6.3.862, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\lib\autofac\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -62,11 +68,15 @@
     <Reference Include="System.ComponentModel.DataAnnotations">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\..\..\packages\Microsoft.AspNet.WebPages.2.0.30506.0\lib\net40\System.Web.Helpers.dll</HintPath>
@@ -99,7 +109,159 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Scripts\roster.js" />
+    <Content Include="Scripts\expedit\roster.js" />
+    <Content Include="Scripts\vendor\backbone\.gitignore" />
+    <Content Include="Scripts\vendor\backbone\backbone-min.js" />
+    <Content Include="Scripts\vendor\backbone\backbone.js" />
+    <Content Include="Scripts\vendor\backbone\docs\backbone-localstorage.html" />
+    <Content Include="Scripts\vendor\backbone\docs\backbone.html" />
+    <Content Include="Scripts\vendor\backbone\docs\backbone.localstorage.html" />
+    <Content Include="Scripts\vendor\backbone\docs\docco.css" />
+    <Content Include="Scripts\vendor\backbone\docs\images\airbnb.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\arrows.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\artsy.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\backbone-mobile.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\backbone.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\background.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\baroque.jpg" />
+    <Content Include="Scripts\vendor\backbone\docs\images\basecamp-calendar.jpg" />
+    <Content Include="Scripts\vendor\backbone\docs\images\bitbucket.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\blossom.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\cloudapp.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\code-school.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\dc-workspace.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\diaspora.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\disqus.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\do.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\easel.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\favicon.ico" />
+    <Content Include="Scripts\vendor\backbone\docs\images\flow.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\foursquare.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\gawker.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\gilt.jpg" />
+    <Content Include="Scripts\vendor\backbone\docs\images\groupon.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\hulu.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\inkling.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\irccloud.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\jolicloud.jpg" />
+    <Content Include="Scripts\vendor\backbone\docs\images\khan-academy.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\lens.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\menagerievet.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\newsblur.jpg" />
+    <Content Include="Scripts\vendor\backbone\docs\images\pandora.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\pitchfork.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\prose.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\quartz.jpg" />
+    <Content Include="Scripts\vendor\backbone\docs\images\rdio.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\salon.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\seatgeek.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\slavery-footprint.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\soundcloud.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\spin.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\stripe.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\syllabus.jpg" />
+    <Content Include="Scripts\vendor\backbone\docs\images\tilemill.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\todos.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\trello.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\tzigla.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\usa-today.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\walmart-mobile.png" />
+    <Content Include="Scripts\vendor\backbone\docs\images\wpcom-notifications.png" />
+    <Content Include="Scripts\vendor\backbone\docs\js\jquery.lazyload.js" />
+    <Content Include="Scripts\vendor\backbone\docs\public\images\grey_%402X.png" />
+    <Content Include="Scripts\vendor\backbone\docs\public\stylesheets\normalize.css" />
+    <Content Include="Scripts\vendor\backbone\docs\todos.html" />
+    <Content Include="Scripts\vendor\backbone\examples\backbone.localStorage.js" />
+    <Content Include="Scripts\vendor\backbone\examples\todos\destroy.png" />
+    <Content Include="Scripts\vendor\backbone\examples\todos\index.html" />
+    <Content Include="Scripts\vendor\backbone\examples\todos\todos.css" />
+    <Content Include="Scripts\vendor\backbone\examples\todos\todos.js" />
+    <Content Include="Scripts\vendor\backbone\index.html" />
+    <Content Include="Scripts\vendor\backbone\index.js" />
+    <Content Include="Scripts\vendor\backbone\test\collection.js" />
+    <Content Include="Scripts\vendor\backbone\test\environment.js" />
+    <Content Include="Scripts\vendor\backbone\test\events.js" />
+    <Content Include="Scripts\vendor\backbone\test\index.html" />
+    <Content Include="Scripts\vendor\backbone\test\model.js" />
+    <Content Include="Scripts\vendor\backbone\test\noconflict.js" />
+    <Content Include="Scripts\vendor\backbone\test\router.js" />
+    <Content Include="Scripts\vendor\backbone\test\sync.js" />
+    <Content Include="Scripts\vendor\backbone\test\vendor\jquery.js" />
+    <Content Include="Scripts\vendor\backbone\test\vendor\json2.js" />
+    <Content Include="Scripts\vendor\backbone\test\vendor\qunit.css" />
+    <Content Include="Scripts\vendor\backbone\test\vendor\qunit.js" />
+    <Content Include="Scripts\vendor\backbone\test\vendor\runner.js" />
+    <Content Include="Scripts\vendor\backbone\test\vendor\underscore.js" />
+    <Content Include="Scripts\vendor\backbone\test\view.js" />
+    <Content Include="Scripts\vendor\jquery\jquery-1.10.2.js" />
+    <Content Include="Scripts\vendor\jquery\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\vendor\JSON-js\cycle.js" />
+    <Content Include="Scripts\vendor\JSON-js\json.js" />
+    <Content Include="Scripts\vendor\JSON-js\json2.js" />
+    <Content Include="Scripts\vendor\JSON-js\json_parse.js" />
+    <Content Include="Scripts\vendor\JSON-js\json_parse_state.js" />
+    <Content Include="Scripts\vendor\MIT-LICENSE.txt" />
+    <Content Include="Scripts\vendor\numeric\documentation.html" />
+    <Content Include="Scripts\vendor\numeric\numeric-1.2.4.min.js" />
+    <Content Include="Scripts\vendor\numeric\numeric.js" />
+    <Content Include="Scripts\vendor\numeric\quadprog.js" />
+    <Content Include="Scripts\vendor\numeric\seedrandom.js" />
+    <Content Include="Scripts\vendor\numeric\sparse2.js" />
+    <Content Include="Scripts\vendor\numeric\svd.js" />
+    <Content Include="Scripts\vendor\three.js\Detector.js" />
+    <Content Include="Scripts\vendor\three.js\postprocessing\BloomPass.js" />
+    <Content Include="Scripts\vendor\three.js\postprocessing\DotScreenPass.js" />
+    <Content Include="Scripts\vendor\three.js\postprocessing\EffectComposer.js" />
+    <Content Include="Scripts\vendor\three.js\postprocessing\FilmPass.js" />
+    <Content Include="Scripts\vendor\three.js\postprocessing\MaskPass.js" />
+    <Content Include="Scripts\vendor\three.js\postprocessing\RenderPass.js" />
+    <Content Include="Scripts\vendor\three.js\postprocessing\SavePass.js" />
+    <Content Include="Scripts\vendor\three.js\postprocessing\ShaderPass.js" />
+    <Content Include="Scripts\vendor\three.js\postprocessing\TexturePass.js" />
+    <Content Include="Scripts\vendor\three.js\ShaderExtras.js" />
+    <Content Include="Scripts\vendor\three.js\Stats.js" />
+    <Content Include="Scripts\vendor\three.js\Three.js" />
+    <Content Include="Scripts\vendor\threex\docs\docco.css" />
+    <Content Include="Scripts\vendor\threex\docs\THREEx.CelShader.html" />
+    <Content Include="Scripts\vendor\threex\docs\THREEx.CubeMap.html" />
+    <Content Include="Scripts\vendor\threex\docs\THREEx.DeviceOrientationState.html" />
+    <Content Include="Scripts\vendor\threex\docs\THREEx.FullScreen.html" />
+    <Content Include="Scripts\vendor\threex\docs\THREEx.GeometryUtils.html" />
+    <Content Include="Scripts\vendor\threex\docs\THREEx.GeometryWobble.html" />
+    <Content Include="Scripts\vendor\threex\docs\THREEx.glCapability.html" />
+    <Content Include="Scripts\vendor\threex\docs\THREEx.KeyboardState.html" />
+    <Content Include="Scripts\vendor\threex\docs\THREEx.LogoTurtle.html" />
+    <Content Include="Scripts\vendor\threex\docs\THREEx.PlasmaShader.html" />
+    <Content Include="Scripts\vendor\threex\docs\THREEx.requestAnimationFrame.html" />
+    <Content Include="Scripts\vendor\threex\docs\THREEx.screenshot.html" />
+    <Content Include="Scripts\vendor\threex\docs\THREEx.SkyMap.html" />
+    <Content Include="Scripts\vendor\threex\docs\THREEx.WindowResize.html" />
+    <Content Include="Scripts\vendor\threex\examples\THREEx.DeviceOrientationState.html" />
+    <Content Include="Scripts\vendor\threex\examples\threex.embedded\noshield-host.html" />
+    <Content Include="Scripts\vendor\threex\examples\threex.embedded\noshield-iframe.html" />
+    <Content Include="Scripts\vendor\threex\examples\threex.embedded\withshield-host.html" />
+    <Content Include="Scripts\vendor\threex\examples\threex.embedded\withshield-iframe.html" />
+    <Content Include="Scripts\vendor\threex\examples\threex.fullscreen.html" />
+    <Content Include="Scripts\vendor\threex\examples\THREEx.KeyboardState.html" />
+    <Content Include="Scripts\vendor\threex\THREEx.CelShader.js" />
+    <Content Include="Scripts\vendor\threex\threex.chromeWebStoreInstall.js" />
+    <Content Include="Scripts\vendor\threex\THREEx.DeviceOrientationState.js" />
+    <Content Include="Scripts\vendor\threex\threex.dragpancontrols.js" />
+    <Content Include="Scripts\vendor\threex\threex.embedded.js" />
+    <Content Include="Scripts\vendor\threex\THREEx.FullScreen.js" />
+    <Content Include="Scripts\vendor\threex\THREEx.GeometryUtils.js" />
+    <Content Include="Scripts\vendor\threex\THREEx.GeometryWobble.js" />
+    <Content Include="Scripts\vendor\threex\THREEx.glCapability.js" />
+    <Content Include="Scripts\vendor\threex\THREEx.KeyboardState.js" />
+    <Content Include="Scripts\vendor\threex\THREEx.LogoTurtle.js" />
+    <Content Include="Scripts\vendor\threex\THREEx.PlasmaShader.js" />
+    <Content Include="Scripts\vendor\threex\THREEx.requestAnimationFrame.js" />
+    <Content Include="Scripts\vendor\threex\THREEx.screenshot.js" />
+    <Content Include="Scripts\vendor\threex\THREEx.SkyMap.js" />
+    <Content Include="Scripts\vendor\threex\threex.sparks.js" />
+    <Content Include="Scripts\vendor\threex\threex.texturePoolBall.js" />
+    <Content Include="Scripts\vendor\threex\THREEx.WindowResize.js" />
+    <Content Include="Scripts\vendor\zepto\zepto.js" />
     <Content Include="Styles\roster.css" />
     <Content Include="Web.config" />
     <Content Include="Views\Web.config" />
@@ -109,6 +271,10 @@
     <Content Include="Module.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\..\..\..\utils\src\main\EXPEDIT.Utils\EXPEDIT.Utils.csproj">
+      <Project>{72ba3616-fd5f-4120-9bfd-9e06cd08ab65}</Project>
+      <Name>EXPEDIT.Utils</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Orchard\Orchard.Framework.csproj">
       <Project>{2D1D92BB-4555-4CBE-8D0E-63563D6CE4C6}</Project>
       <Name>Orchard.Framework</Name>
@@ -142,7 +308,6 @@
     <Compile Include="Services\CleanSessionsBackgroundTask.cs" />
     <Compile Include="Services\XmlRpcHandler.cs" />
     <Compile Include="ViewModels\Json\Allocation.cs" />
-    <Compile Include="ViewModels\Json\Antecedent.cs" />
     <Compile Include="ViewModels\Json\Asset.cs" />
     <Compile Include="ViewModels\Json\AssetGroup.cs" />
     <Compile Include="ViewModels\Json\Capacity.cs" />
@@ -152,7 +317,6 @@
     <Compile Include="ViewModels\Json\CostType.cs" />
     <Compile Include="ViewModels\Json\Geolocation.cs" />
     <Compile Include="ViewModels\Json\License.cs" />
-    <Compile Include="ViewModels\Json\Location.cs" />
     <Compile Include="ViewModels\Json\Problem.cs" />
     <Compile Include="ViewModels\Json\Roster.cs" />
     <Compile Include="ViewModels\Json\Session.cs" />
@@ -190,6 +354,37 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\vendor\backbone\.git" />
+    <Content Include="Scripts\vendor\backbone\.npmignore" />
+    <Content Include="Scripts\vendor\backbone\.travis.yml" />
+    <Content Include="Scripts\vendor\backbone\backbone-min.map" />
+    <Content Include="Scripts\vendor\backbone\CNAME" />
+    <Content Include="Scripts\vendor\backbone\CONTRIBUTING.md" />
+    <Content Include="Scripts\vendor\backbone\docs\jsl.conf" />
+    <Content Include="Scripts\vendor\backbone\docs\public\fonts\aller-bold.eot" />
+    <Content Include="Scripts\vendor\backbone\docs\public\fonts\aller-bold.ttf" />
+    <Content Include="Scripts\vendor\backbone\docs\public\fonts\aller-bold.woff" />
+    <Content Include="Scripts\vendor\backbone\docs\public\fonts\aller-light.eot" />
+    <Content Include="Scripts\vendor\backbone\docs\public\fonts\aller-light.ttf" />
+    <Content Include="Scripts\vendor\backbone\docs\public\fonts\aller-light.woff" />
+    <Content Include="Scripts\vendor\backbone\docs\public\fonts\fleurons.eot" />
+    <Content Include="Scripts\vendor\backbone\docs\public\fonts\fleurons.ttf" />
+    <Content Include="Scripts\vendor\backbone\docs\public\fonts\fleurons.woff" />
+    <Content Include="Scripts\vendor\backbone\docs\public\fonts\novecento-bold.eot" />
+    <Content Include="Scripts\vendor\backbone\docs\public\fonts\novecento-bold.ttf" />
+    <Content Include="Scripts\vendor\backbone\docs\public\fonts\novecento-bold.woff" />
+    <Content Include="Scripts\vendor\backbone\LICENSE" />
+    <Content Include="Scripts\vendor\backbone\package.json" />
+    <Content Include="Scripts\vendor\backbone\Rakefile" />
+    <Content Include="Scripts\vendor\backbone\README.md" />
+    <Content Include="Scripts\vendor\backbone\test\model.coffee" />
+    <Content Include="Scripts\vendor\JSON-js\README" />
+    <Content Include="Scripts\vendor\numeric\.externalToolBuilders\Call builder.sh.launch" />
+    <Content Include="Scripts\vendor\numeric\.project" />
+    <Content Include="Scripts\vendor\threex\Makefile" />
+    <Content Include="Scripts\vendor\threex\README.md" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

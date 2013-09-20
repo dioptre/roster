@@ -16,13 +16,13 @@ namespace EXPEDIT.Roster.ViewModels.Json
         public string Name { get; set; }
 
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public Guid Id { get; set; }
 
         [JsonProperty("weight")]
-        public int Weight { get; set; }
+        public double Weight { get; set; }
 
         [JsonProperty("refactor")]
-        public int Refactor { get; set; }
+        public double Refactor { get; set; }
     }
 
 }

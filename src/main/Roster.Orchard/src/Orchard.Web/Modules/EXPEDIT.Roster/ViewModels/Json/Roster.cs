@@ -13,7 +13,7 @@ namespace EXPEDIT.Roster.ViewModels.Json
     {
 
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public Guid Id { get; set; }
 
         [JsonProperty("name")]
         public string Name { get; set; }
@@ -22,7 +22,7 @@ namespace EXPEDIT.Roster.ViewModels.Json
         public User User { get; set; }
 
         [JsonProperty("location")]
-        public Location Location { get; set; }
+        public Geolocation Location { get; set; }
 
         [JsonProperty("culture")]
         public string Culture { get; set; }

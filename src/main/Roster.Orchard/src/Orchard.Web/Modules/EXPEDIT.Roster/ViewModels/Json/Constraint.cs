@@ -13,7 +13,7 @@ namespace EXPEDIT.Roster.ViewModels.Json
     {
 
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public Guid Id { get; set; }
 
         [JsonProperty("constraintType")]
         public ConstraintType ConstraintType { get; set; }
@@ -22,10 +22,10 @@ namespace EXPEDIT.Roster.ViewModels.Json
         public bool Fixed { get; set; }
 
         [JsonProperty("weight")]
-        public int Weight { get; set; }
+        public double Weight { get; set; }
 
         [JsonProperty("blocks")]
-        public object[][] Blocks { get; set; }
+        public int[][] Blocks { get; set; }
     }
 
 }

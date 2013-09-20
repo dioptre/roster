@@ -16,13 +16,13 @@ namespace EXPEDIT.Roster.ViewModels.Json
         public string Name { get; set; }
 
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public Guid Id { get; set; }
 
         [JsonProperty("min")]
-        public int Min { get; set; }
+        public double Min { get; set; }
 
         [JsonProperty("max")]
-        public int Max { get; set; }
+        public double Max { get; set; }
 
         [JsonProperty("costs")]
         public Cost[] Costs { get; set; }
@@ -40,13 +40,13 @@ namespace EXPEDIT.Roster.ViewModels.Json
         public double Confidence { get; set; }
 
         [JsonProperty("duration")]
-        public int Duration { get; set; }
+        public double Duration { get; set; }
 
         [JsonProperty("eta")]
-        public string Eta { get; set; }
+        public DateTime Eta { get; set; }
 
         [JsonProperty("priority")]
-        public int Priority { get; set; }
+        public double Priority { get; set; }
 
         [JsonProperty("allocations")]
         public Allocation[] Allocations { get; set; }

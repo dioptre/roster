@@ -16,16 +16,16 @@ namespace EXPEDIT.Roster.ViewModels.Json
         public string Name { get; set; }
 
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public Guid Id { get; set; }
 
         [JsonProperty("license")]
         public License License { get; set; }
 
         [JsonProperty("created")]
-        public string Created { get; set; }
+        public DateTime Created { get; set; }
 
         [JsonProperty("expiry")]
-        public string Expiry { get; set; }
+        public DateTime Expiry { get; set; }
     }
 
 }

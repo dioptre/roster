@@ -16,16 +16,16 @@ namespace EXPEDIT.Roster.ViewModels.Json
         public string Name { get; set; }
 
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public Guid Id { get; set; }
 
         [JsonProperty("version")]
         public int Version { get; set; }
 
         [JsonProperty("min")]
-        public int Min { get; set; }
+        public double Min { get; set; }
 
         [JsonProperty("max")]
-        public int Max { get; set; }
+        public double Max { get; set; }
 
         [JsonProperty("iterations")]
         public int Iterations { get; set; }
@@ -37,7 +37,7 @@ namespace EXPEDIT.Roster.ViewModels.Json
         public bool LiveUpdateServer { get; set; }
 
         [JsonProperty("complexity")]
-        public int Complexity { get; set; }
+        public double Complexity { get; set; }
 
         [JsonProperty("costTypes")]
         public CostType[] CostTypes { get; set; }

@@ -16,19 +16,19 @@ namespace EXPEDIT.Roster.ViewModels.Json
         public string Name { get; set; }
 
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public Guid Id { get; set; }
 
         [JsonProperty("min")]
-        public int Min { get; set; }
+        public double Min { get; set; }
 
         [JsonProperty("max")]
-        public int Max { get; set; }
+        public double Max { get; set; }
 
         [JsonProperty("costType")]
         public CostType CostType { get; set; }
 
         [JsonProperty("valued")]
-        public int Valued { get; set; }
+        public double Valued { get; set; }
     }
 
 }

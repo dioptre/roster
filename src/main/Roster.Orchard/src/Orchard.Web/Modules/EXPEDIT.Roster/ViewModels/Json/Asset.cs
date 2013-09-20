@@ -16,16 +16,16 @@ namespace EXPEDIT.Roster.ViewModels.Json
         public string Name { get; set; }
 
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public Guid Id { get; set; }
 
         [JsonProperty("min")]
-        public int Min { get; set; }
+        public double Min { get; set; }
 
         [JsonProperty("max")]
-        public int Max { get; set; }
+        public double Max { get; set; }
 
         [JsonProperty("antecedents")]
-        public Antecedent[] Antecedents { get; set; }
+        public Asset[] Antecedents { get; set; }
 
         [JsonProperty("constraints")]
         public Constraint[] Constraints { get; set; }
@@ -34,19 +34,19 @@ namespace EXPEDIT.Roster.ViewModels.Json
         public Cost[] Costs { get; set; }
 
         [JsonProperty("priority")]
-        public int Priority { get; set; }
+        public double Priority { get; set; }
 
         [JsonProperty("capacities")]
         public Capacity[] Capacities { get; set; }
 
         [JsonProperty("availability")]
-        public object[][] Availability { get; set; }
+        public int[][] Availability { get; set; }
 
         [JsonProperty("geolocation")]
         public Geolocation Geolocation { get; set; }
 
         [JsonProperty("assetGroups")]
-        public object[] AssetGroups { get; set; }
+        public AssetGroup[] AssetGroups { get; set; }
     }
 
 }
