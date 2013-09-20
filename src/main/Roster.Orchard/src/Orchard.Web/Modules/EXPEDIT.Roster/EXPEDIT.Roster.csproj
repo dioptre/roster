@@ -54,6 +54,9 @@
       <Private>True</Private>
       <HintPath>..\..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\..\lib\newtonsoft.json\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.ComponentModel.DataAnnotations">
@@ -138,6 +141,25 @@
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Services\CleanSessionsBackgroundTask.cs" />
     <Compile Include="Services\XmlRpcHandler.cs" />
+    <Compile Include="ViewModels\Json\Allocation.cs" />
+    <Compile Include="ViewModels\Json\Antecedent.cs" />
+    <Compile Include="ViewModels\Json\Asset.cs" />
+    <Compile Include="ViewModels\Json\AssetGroup.cs" />
+    <Compile Include="ViewModels\Json\Capacity.cs" />
+    <Compile Include="ViewModels\Json\Constraint.cs" />
+    <Compile Include="ViewModels\Json\ConstraintType.cs" />
+    <Compile Include="ViewModels\Json\Cost.cs" />
+    <Compile Include="ViewModels\Json\CostType.cs" />
+    <Compile Include="ViewModels\Json\Geolocation.cs" />
+    <Compile Include="ViewModels\Json\License.cs" />
+    <Compile Include="ViewModels\Json\Location.cs" />
+    <Compile Include="ViewModels\Json\Problem.cs" />
+    <Compile Include="ViewModels\Json\Roster.cs" />
+    <Compile Include="ViewModels\Json\Session.cs" />
+    <Compile Include="ViewModels\Json\Solution.cs" />
+    <Compile Include="ViewModels\Json\Subscription.cs" />
+    <Compile Include="ViewModels\Json\User.cs" />
+    <Compile Include="ViewModels\Json\VirtualAsset.cs" />
     <Compile Include="ViewModels\RosterViewModel.cs" />
     <Compile Include="Permissions.cs" />
     <Compile Include="ResourceManifest.cs" />
