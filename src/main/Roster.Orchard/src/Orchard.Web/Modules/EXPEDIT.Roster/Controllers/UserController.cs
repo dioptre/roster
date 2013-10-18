@@ -26,7 +26,7 @@ namespace EXPEDIT.Roster.Controllers
             var m = new RosterViewModel { RosterID = Guid.NewGuid() };
             using (new System.Transactions.TransactionScope(System.Transactions.TransactionScopeOption.Suppress))
             {
-                using (var c = new EXPEDIT.Utils.DAL.Models.EODB(null))
+                using (var c = new EXPEDIT.Utils.DAL.Models.EODBC(EXPEDIT.Utils.DAL.DefaultConnectionString.DefaultConfigString, null))
                 {
                     m.RosterID = (from o in c.Companies select o).FirstOrDefault().CompanyID;
                 }
